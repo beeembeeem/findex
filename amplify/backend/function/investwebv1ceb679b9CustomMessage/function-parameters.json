@@ -1,0 +1,14 @@
+{
+    "trigger": true,
+    "modules": [
+        "verification-link"
+    ],
+    "parentResource": "investwebv1ceb679b9",
+    "functionName": "investwebv1ceb679b9CustomMessage",
+    "parentStack": "auth",
+    "triggerEnvs": "[{\"key\":\"RESOURCENAME\",\"value\":\"resourceName\"}]",
+    "triggerTemplate": "CustomMessage.json.ejs",
+    "roleName": "investwebv1ceb679b9CustomMessage",
+    "skipEdit": true,
+    "resourceName": "investwebv1ceb679b9CustomMessage"
+}

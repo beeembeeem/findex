@@ -1,0 +1,27 @@
+{
+    "ev": {
+        "awscloudformation": {
+            "AuthRoleName": "amplify-investwebv1-ev-170154-authRole",
+            "UnauthRoleArn": "arn:aws:iam::520532952078:role/amplify-investwebv1-ev-170154-unauthRole",
+            "AuthRoleArn": "arn:aws:iam::520532952078:role/amplify-investwebv1-ev-170154-authRole",
+            "Region": "us-east-1",
+            "DeploymentBucketName": "amplify-investwebv1-ev-170154-deployment",
+            "UnauthRoleName": "amplify-investwebv1-ev-170154-unauthRole",
+            "StackName": "amplify-investwebv1-ev-170154",
+            "StackId": "arn:aws:cloudformation:us-east-1:520532952078:stack/amplify-investwebv1-ev-170154/5d0027b0-3199-11ea-9e0c-0e765a9edd1f",
+            "AmplifyAppId": "d27ozamv1elxmq"
+        },
+        "categories": {
+            "function": {
+                "investwebv1ceb679b9CustomMessage": {
+                    "REDIRECTURL": "",
+                    "EMAILSUBJECT": "",
+                    "EMAILMESSAGE": ""
+                }
+            },
+            "auth": {
+                "investwebv1ceb679b9": {}
+            }
+        }
+    }
+}

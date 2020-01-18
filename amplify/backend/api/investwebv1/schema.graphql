@@ -1,0 +1,46 @@
+type Portfolio @model @auth (
+    rules:[
+    {allow: owner, operations: [read, update, delete, create]}
+    ])
+  {
+	id: ID!
+    name : String!
+    type : String!
+    stocks: [PortfolioStockList]@connection(name:"PortfolioStock", sortField:"createdAt")
+  
+}
+type PublicPortfolio @model @auth (
+    rules:[
+    {allow: owner, operations: [ update, delete, create]}
+    ]){
+	id: ID!
+	name: String!
+	type: String!
+}
+    type PortfolioStockList  @model{
+	id: ID!
+    name : String!
+    symbol : String!
+    createdAt : String!
+    portfolio :Portfolio! @connection(name:"PortfolioStock", sortField :"createdAt")
+  
+}
+    type globalStocks  @model{
+	id: ID!
+    name : String!
+    symbol : String!
+      createdAt: String!  
+}
+
+ type Event  @model @key(name: "queryName", fields:[
+  "queryName", "createdAt"],
+  queryField:"itemsByDate"
+)  
+  {
+	id: ID!
+    name : String!
+      createdAt: String!
+    queryName : String!
+}
+
+    
