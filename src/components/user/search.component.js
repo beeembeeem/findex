@@ -119,7 +119,7 @@ class search extends Component {
   };
 
   render() {
-    console.log(this.state)
+    console.log(this.state);
     return (
       <div className="w-100 pr-2">
         <input
@@ -137,7 +137,7 @@ class search extends Component {
               this.state.searchField &&
               this.state.searchStockList.map(item => (
                 <li class="list-group-item search-result-li  justify-content-between align-items-center ">
-                   <div class="d-block ">
+                  <div class="d-block ">
                     <span
                       class={
                         item.data &&
@@ -156,27 +156,28 @@ class search extends Component {
                       }
                     >
                       {item._source.symbol}
-</span>
-<span>
-                    <p className="search-p m-0">{item._source.name}</p>
-
                     </span>
-                  <span className="search-number-holder text-right">
-                    <p className="m-0">
-                      {item.data && item.data.profile ? (
-                        item.data.profile.price
-                      ) : (
-                        <div className="data-loader-sm "></div>
-                      )}
-                    </p>
-                    <p className="m-0">
-                      {item.data && item.data.profile ? (
-                        item.data.profile.changes + " " + item.data.profile.changesPercentage
-                      ) : (
-                        <div className="data-loader-sm "></div>
-                      )}
-                    </p>
-                  </span>
+                    <span>
+                      <p className="search-p m-0">{item._source.name}</p>
+                    </span>
+                    <span className="search-number-holder text-right">
+                      <p className="m-0">
+                        {item.data && item.data.profile ? (
+                          item.data.profile.price
+                        ) : (
+                          <div className="data-loader-sm "></div>
+                        )}
+                      </p>
+                      <p className="m-0">
+                        {item.data && item.data.profile ? (
+                          item.data.profile.changes +
+                          " " +
+                          item.data.profile.changesPercentage
+                        ) : (
+                          <div className="data-loader-sm "></div>
+                        )}
+                      </p>
+                    </span>
                   </div>
                 </li>
               ))}

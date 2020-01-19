@@ -34,7 +34,7 @@ export default class Navbar extends Component {
         }
       >
         <nav className=" navbar  px-0  navbar-dark  navbar-expand-lg">
-          <div className="logo  d-flex justify-content-between w-100">
+          <div className="logo   justify-content-between w-100">
                       <Search data={this.props.data} />
             <button
               className="navbar-toggler"

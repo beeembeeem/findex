@@ -43,7 +43,11 @@ class Index extends Component {
     return (
       <div className = "main">
           <Navbar data = {this.props.data}></Navbar>
-      <p className="text-light"> not signed in </p>
+      
+      <div class="overflow-auto test2">
+      This is an example of using <code>.overflow-auto</code> on an element with set width and height dimensions. By design, this content will vertically scroll.
+      </div>
+
   
       </div>
       );}

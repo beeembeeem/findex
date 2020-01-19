@@ -7,12 +7,15 @@ body, html{
   background-color: rgb(27,30,33,1);
   font-size: 100%;
 }
-
+.test2{
+  max-height: 200px;
+  max-width: 50px;
+}
 .search-list{
   overflow-y: scroll;
   scrollbar-width: none; /* Firefox */
   -ms-overflow-style: none;  /* Internet Explorer 10+ */
-  height: 220px;
+  max-height: 220px;
 }
 
 
@@ -245,7 +248,8 @@ body a, body a:hover{
 /* Extra small devices (phones, 600px and down) */
 @media only screen and (max-width: 600px) {
   .search-list{
-    height: 200px;}
+    max-height: 220px;
+  }
   
 }
 
