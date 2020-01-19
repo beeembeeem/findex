@@ -17,7 +17,9 @@ body, html{
   -ms-overflow-style: none;  /* Internet Explorer 10+ */
   max-height: 220px;
 }
-
+.search-list::-webkit-scrollbar { 
+  display: none; /* Chrome Safari */
+}
 
 .form-holder{
   display: flex;
@@ -78,11 +80,7 @@ body a, body a:hover{
   padding-right: 5px;
 
 }
-.search-parent{
-  overflow: scroll;
-  -webkit-overflow-scrolling: touch;
 
-}
 
 .sidebar{
   width: 215px;
