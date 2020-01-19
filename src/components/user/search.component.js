@@ -132,53 +132,36 @@ class search extends Component {
           onChange={this.searchHandle}
         />
         <div className="search-parent">
-          <ul class="list-group search-list position-absolute mt-2 w-100 px-1">
+          <ul class="list-group search-list">
+            {/* Dumping search match list */}
             {this.state.searchStockList != [] &&
               this.state.searchField &&
               this.state.searchStockList.map(item => (
-                <li class="list-group-item search-result-li  justify-content-between align-items-center ">
-                  <div class="d-block ">
-                    <span
-                      class={
-                        item.data &&
-                        item.data.profile &&
-                        item.data.profile.changes > 0
-                          ? "badge searchListItem badge-success badge-pill valid-data-high"
-                          : item.data &&
-                            item.data.profile &&
-                            item.data.profile.changes < 0
-                          ? "badge searchListItem badge-danger badge-pill valid-data-low"
-                          : item.data &&
-                            item.data.profile &&
-                            item.data.profile.changes == 0
-                          ? "badge searchListItem badge-dark badge-pill"
-                          : "badge searchListItem badge-light badge-pill invalid-data"
-                      }
-                    >
-                      {item._source.symbol}
-                    </span>
-                    <span>
-                      <p className="search-p m-0">{item._source.name}</p>
-                    </span>
-                    <span className="search-number-holder text-right">
-                      <p className="m-0">
-                        {item.data && item.data.profile ? (
-                          item.data.profile.price
-                        ) : (
-                          <div className="data-loader-sm "></div>
-                        )}
-                      </p>
-                      <p className="m-0">
-                        {item.data && item.data.profile ? (
-                          item.data.profile.changes +
-                          " " +
-                          item.data.profile.changesPercentage
-                        ) : (
-                          <div className="data-loader-sm "></div>
-                        )}
-                      </p>
-                    </span>
-                  </div>
+                <li
+                  class="list-group-item search-result-li d-flex justify-content-between align-items-center "
+                  onClick={e => this.searchClickHandler(e, item._source.symbol)}
+                >
+                  <p className="searchListItem m-0">{item._source.name}</p>
+
+                  <span
+                    class={
+                      item.data &&
+                      item.data.profile &&
+                      item.data.profile.changes > 0
+                        ? "badge searchListItem badge-success badge-pill valid-data-high"
+                        : item.data &&
+                          item.data.profile &&
+                          item.data.profile.changes < 0
+                        ? "badge searchListItem badge-danger badge-pill valid-data-low"
+                        : item.data &&
+                          item.data.profile &&
+                          item.data.profile.changes == 0
+                        ? "badge searchListItem badge-dark badge-pill"
+                        : "badge searchListItem badge-light badge-pill invalid-data"
+                    }
+                  >
+                    {item._source.symbol}
+                  </span>
                 </li>
               ))}
           </ul>
