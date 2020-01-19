@@ -312,6 +312,10 @@ body a, body a:hover{
 }
 .searchListItem{
   cursor: pointer;
+  display: inline-block;
+  font-size: 0.8em;
+  word-wrap: break-word;
+
 }
 .stock-expand-option{
   position: absolute;
