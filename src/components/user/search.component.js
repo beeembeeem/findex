@@ -137,7 +137,7 @@ class search extends Component {
               this.state.searchField &&
               this.state.searchStockList.map(item => (
                 <li class="list-group-item search-result-li d-flex justify-content-between align-items-center ">
-                   <span>
+                   <div class="d-block ">
                     <span
                       class={
                         item.data &&
@@ -177,7 +177,7 @@ class search extends Component {
                       )}
                     </p>
                   </span>
-                  </span>
+                  </div>
                 </li>
               ))}
           </ul>
