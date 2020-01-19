@@ -6,7 +6,7 @@ export const DashboardPortfolios = `query{listPortfolios{
         items{
           id
           name
-          price
+          symbol
         }
       }
     }

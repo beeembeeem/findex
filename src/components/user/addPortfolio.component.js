@@ -5,7 +5,7 @@ import * as mutations from "../../graphql/mutations";
 import * as queries from "../../graphql/queries";
 import Case from "case";
 import $ from "jquery";
-import AddStock from "./addStock.component"
+import AddStock from "./addStock.component";
 var yahooFinance = require("yahoo-finance");
 
 class addPortfolio extends Component {
@@ -18,10 +18,9 @@ class addPortfolio extends Component {
       searchDuplicateError: "",
       dupAlert: false,
       sucAlert: false,
-      delAlert:false
+      delAlert: false
     };
     this.portfolioSettings = portfolioSettings;
-    this.alertTimeOut = 0;
   }
   componentDidMount() {
     console.log(this.props);
@@ -35,14 +34,18 @@ class addPortfolio extends Component {
   createPortfolio = async e => {
     e.preventDefault();
     if (this.props.data.isAuthenticated) {
-      const result = await API.graphql(
-        graphqlOperation(mutations.createPortfolio, {
-          input: { name: this.state.name, type: this.state.type }
-        })
-      );
-      console.log("Added Portfolio succesfully");
-      console.log(result);
-      this.props.work.redirectToAddPortfolio_f();
+      try {
+        const result = await API.graphql(
+          graphqlOperation(mutations.createPortfolio, {
+            input: { name: this.state.name, type: this.state.type }
+          })
+        );
+        console.log("Added Portfolio succesfully");
+        console.log(result);
+        this.props.work.redirectToAddPortfolio_f();
+      } catch (error) {
+        console.log(error);
+      }
     }
   };
   render() {
@@ -50,7 +53,6 @@ class addPortfolio extends Component {
     console.log(this.state);
     return (
       <div className="addPortfolioModal">
-        
         <div className="addPortfolioInner card">
           <div className="card-header ">
             <h5 className="card-header-title">Create a New Portfolio</h5>
@@ -85,9 +87,7 @@ class addPortfolio extends Component {
                 </div>
               ))}
             </form>
-                        <AddStock/>
-
-            
+            <AddStock />
             <div className="col-12 col-lg-4">
               <button
                 type="submit"
@@ -96,8 +96,8 @@ class addPortfolio extends Component {
               >
                 Submit
               </button>
-            </div>            </div>
-
+            </div>{" "}
+          </div>
         </div>
       </div>
     );

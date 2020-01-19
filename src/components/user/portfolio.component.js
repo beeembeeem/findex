@@ -11,7 +11,8 @@ class Portfolio extends Component {
       portfolioList: [],
       redirectToAddPortfolio: false,
       redirectToDeletePortfolio: false,
-      portfolioToDelete: undefined
+      portfolioToDelete: undefined,
+      fetching:true
     };
     this.getgraph();
   }
@@ -46,11 +47,17 @@ class Portfolio extends Component {
   };
   getgraph = async () => {
     if (this.props.data.isAuthenticated) {
-      const result = await API.graphql(graphqlOperation(DashboardPortfolios));
+      try {
+              const result = await API.graphql(graphqlOperation(DashboardPortfolios));
       console.log(result);
       this.setState({
-        portfolioList: result.data.listPortfolios.items
+        portfolioList: result.data.listPortfolios.items,
+        fetching : false
       });
+
+      } catch (error) {
+        console.log(error)
+      }
     }
   };
 
@@ -92,7 +99,7 @@ class Portfolio extends Component {
               }}
             />
           )}
-          <div className="text-dark border border-dark p-3 rounded">
+          <div className="text-dark p-3 portfolio-bg rounded">
             <div className="addButton text-center  rounded">
               <button
                 className=" btn-outline-light btn-sm  btn h3 m-0 "
@@ -107,12 +114,15 @@ class Portfolio extends Component {
             </div>
             <h5 className="text-light ">Portfolios</h5>
             <div className="row p-2">
-              {this.state.portfolioList.length === 0 ? (
-                <div className="container text-center text-light ">
-                  {" "}
-                  <h4>Fetching Data...</h4>
+              {this.state.fetching ? (
+                <div className="container text-center text-light portfolio-loader">
                 </div>
-              ) : (
+              ) : this.state.portfolioList.length === 0 ?
+              <div className="container text-center text-light ">
+                  {" "}
+                  <h4>Start by creating a new portfolio</h4>
+                </div>
+               :(
                 this.state.portfolioList.map(item => (
                   <div key={item.id} className="col-12 col-md-6 py-2">
                     <div className="card portfolio">

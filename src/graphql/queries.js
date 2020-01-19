@@ -10,7 +10,7 @@ export const getPortfolio = `query GetPortfolio($id: ID!) {
       items {
         id
         name
-        price
+        symbol
         createdAt
       }
       nextToken
@@ -67,7 +67,7 @@ export const getPortfolioStockList = `query GetPortfolioStockList($id: ID!) {
   getPortfolioStockList(id: $id) {
     id
     name
-    price
+    symbol
     createdAt
     portfolio {
       id
@@ -94,7 +94,7 @@ export const listPortfolioStockLists = `query ListPortfolioStockLists(
     items {
       id
       name
-      price
+      symbol
       createdAt
       portfolio {
         id

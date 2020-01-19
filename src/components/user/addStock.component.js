@@ -13,21 +13,78 @@ class notFound extends Component {
       sucAlert: false,
       delAlert: false
     };
+    this.alertTimeOut = 0;
   }
-  componentDidMount() {
-    this.setState({ comment: "Hello" });
+  componentDidMount() {}
+  componentWillUnmount() {
+    if (this.alertTimeOut) {
+      clearTimeout(this.alertTimeOut);
+    }
   }
+  getSearchChanges = async currentSearchList => {
+    var first = true;
+    var second = false;
+    for (let i = 0; i < currentSearchList.length; i++) {
+      if (first) {
+        if (i > 2) {
+          first = false;
+        }
+      } else if (!second) {
+        this.setState({
+          searchStockList: currentSearchList
+        });
+        second = true;
+      }
+      var data = {};
+      var currentStock = currentSearchList[i];
+      try {
+        data = await fetch(
+          `https://financialmodelingprep.com/api/v3/company/profile/${currentStock._source.symbol}`
+        );
+        data = await data.json();
+        currentStock.data = data;
+        currentSearchList.splice(i, currentStock);
+      } catch (error) {
+        console.log(error);
+      }
+      console.log(data);
+      console.log(currentStock);
+      console.log(currentSearchList);
+    }
 
+    this.setState({
+      searchStockList: currentSearchList
+    });
+  };
   search = async () => {
+    var currentSearchList = this.state.searchStockList;
+    var updatedSearchList = [];
+    currentSearchList.filter(item => {
+      if (
+        item._source.symbol.includes(this.state.searchField) ||
+        item._source.name.includes(this.state.searchField)
+      ) {
+        updatedSearchList.push(item);
+      }
+    });
+    this.setState({
+      searchStockList: updatedSearchList
+    });
     const userinput = "*" + this.state.searchField + "*";
+    var fields = []
+    if(this.state.searchField.length < 5){
+        fields = ["symbol^2", "name"]
+    } else {
+        fields = ["symbol", "name"]
+    }
     const query = {
       query: {
         query_string: {
-          fields: ["symbol^2", "name"],
+          fields: fields,
           query: userinput
         }
       },
-      size: 500
+      size: 100
     };
 
     try {
@@ -43,9 +100,7 @@ class notFound extends Component {
         }
       );
       const json = await result.json();
-      this.setState({
-        searchStockList: json.hits.hits
-      });
+      this.getSearchChanges(json.hits.hits);
     } catch (error) {
       console.log(error);
     }
@@ -154,6 +209,11 @@ class notFound extends Component {
       currentStock.expanded = false;
       currentStockList.splice(currentStockIndex, currentStock);
     } else {
+      currentStock.expanded = true;
+      currentStockList.splice(currentStockIndex, currentStock);
+      this.setState({
+        selectedStockList: currentStockList
+      });
       var data = await fetch(
         `https://financialmodelingprep.com/api/v3/company/profile/${currentStock.symbol}`
       );
@@ -168,7 +228,54 @@ class notFound extends Component {
       selectedStockList: currentStockList
     });
   };
+  expandAllStockData = async () => {
+    console.log("expanding");
+    this.setState({
+      expandingAll: true
+    });
+    var currentStockList = this.state.selectedStockList;
+    var newList = [];
+    for (var i = 0; i < this.state.selectedStockList.length; i++) {
+      var currentStock = currentStockList[i];
+      try {
+        var data = await fetch(
+          `https://financialmodelingprep.com/api/v3/company/profile/${currentStock.symbol}`
+        );
+        data = await data.json();
+        console.log(data);
+        currentStock.data = data;
+      } catch (error) {
+        console.log(error);
+      }
+      currentStock.expanded = true;
+      newList.push(currentStock);
+    }
+    console.log(newList);
+    this.setState({
+      selectedStockList: newList,
+      expandingAll: false
+    });
+  };
+  shrinkAllStockData = () => {
+    console.log("expanding");
+    this.setState({
+      expandingAll: true
+    });
+    var currentStockList = this.state.selectedStockList;
+    var newList = [];
+    for (var i = 0; i < this.state.selectedStockList.length; i++) {
+      var currentStock = currentStockList[i];
+      currentStock.expanded = false;
+      newList.push(currentStock);
+    }
+    console.log(newList);
+    this.setState({
+      selectedStockList: newList,
+      expandingAll: false
+    });
+  };
   render() {
+    console.log(this.state);
     return (
       <form className="card-body col-12 col-lg-6 ">
         <div className="form-group col-12 ">
@@ -183,6 +290,7 @@ class notFound extends Component {
             type="search"
           />
           <ul class="list-group search-list">
+            {/* Dumping search match list */}
             {this.state.searchStockList != [] &&
               this.state.searchField &&
               this.state.searchStockList.map(item => (
@@ -192,16 +300,46 @@ class notFound extends Component {
                 >
                   <p className="searchListItem m-0">{item._source.name}</p>
 
-                  <span class="badge searchListItem badge-primary badge-pill">
+                  <span
+                    class={
+                      item.data &&
+                      item.data.profile &&
+                      item.data.profile.changes > 0
+                        ? "badge searchListItem badge-success badge-pill valid-data-high"
+                        : item.data &&
+                          item.data.profile &&
+                          item.data.profile.changes < 0
+                        ? "badge searchListItem badge-danger badge-pill valid-data-low"
+                        : item.data &&
+                          item.data.profile &&
+                          item.data.profile.changes == 0 
+                        ? "badge searchListItem badge-dark badge-pill"
+                        : "badge searchListItem badge-light badge-pill invalid-data"
+                    }
+                  >
                     {item._source.symbol}
                   </span>
                 </li>
               ))}
           </ul>
         </div>
-        <div className="justify-content-around row">
+        <div className="justify-content-around row position-relative">
+          {/* Handle expand all and shrink all button */}
+          {this.state.selectedStockList.length > 0 && (
+            <div className="col-12 text-right selected-stock-options">
+              <a onClick={this.expandAllStockData}>Expand Details</a> /{" "}
+              <a onClick={this.shrinkAllStockData}> Shrink Details</a>
+            </div>
+          )}
+          {/* Expanding All Loader */}
+          {this.state.expandingAll && (
+            <div className="w-100 h-100 position-absolute  expanding-all-div">
+              <div className="expanding-all-loader"></div>
+            </div>
+          )}
+          {/* Dumping the selected stock list */}
           {this.state.selectedStockList.map(item => (
-            <div className="col-lg-6 col-12 py-3 px-5 px-lg-3 ">
+            <div className="col-lg-6 col-6 py-3 px-2 px-lg-3 ">
               <div className="card text-white bg-primary">
                 <div className="card-header text-center">
                   {/* MAIN SIGN */}
@@ -224,35 +362,61 @@ class notFound extends Component {
                     <span class="fas fa-chevron-down"></span>
                   </button>
                 </div>
-                {item.expanded && item.data.profile ? (
+                {/* dumping and expanding information about selected stocks */}
+                {item.expanded && (
                   <div class="card-body stock-card-body py-1 text-center ">
-                    {" "}
-                    <div className="row">
-                      <div className="col-12">
-                        <a href={item.data.profile.website} target="_blank">
-                          {item.data.profile.companyName}
-                        </a>
+                    {/* actual dumping of information */}
+                    {item.data && item.data.profile ? (
+                      <div>
+                        <div className="row py-1">
+                          <div className="col-12">
+                            <a href={item.data.profile.website} target="_blank">
+                              {item.data.profile.companyName}
+                            </a>
+                          </div>
+                        </div>
+                        <div className=" row py-1 middle-data">
+                          <div className="col-6 px-0">
+                            ${item.data.profile.price}
+                          </div>
+                          <div className="col-6 px-0">
+                            {item.data.profile.changesPercentage}
+                          </div>
+                        </div>
+                        <div className="row py-1">
+                          <div className="col-12">
+                            <a
+                              href={`https://www.google.com/search?q=${item.data
+                                .profile.industry +
+                                " " +
+                                item.data.profile.sector}`}
+                              target="_blank"
+                            >
+                              {item.data.profile.industry}
+                            </a>
+                          </div>
+                        </div>
                       </div>
-                    </div>
-                    <div className=" row ">
-                      <div className="col-6">${item.data.profile.price}</div>
-                      <div className="col-6">
-                        {item.data.profile.changesPercentage}
-                      </div>
-                    </div>
-                    <div className="row">
-                      <div className="col-12">
+                    ) : item.data && !item.data.profile ? (
+                      // Case 1: No Data coming through
+                      <div className="text-center">
+                        <span className=" py-1">
+                          {" "}
+                          No information availlable.
+                        </span>
+                        <br />
                         <a
-                          href={`https://www.google.com/search?q=${item.data.profile.industry + " " + item.data.profile.sector}`}
-                          target="_blank"
+                          className="py-1"
+                          href={`https://google.com/search?q=${item.symbol}`}
                         >
-                          {item.data.profile.industry} <br/>{item.data.profile.sector}
+                          Search <b>{item.symbol}</b> in Google
                         </a>
                       </div>
-                    </div>
+                    ) : (
+                      // Loading circle
+                      <div className="data-loader "></div>
+                    )}
                   </div>
-                ) : (
-                  ""
                 )}
               </div>
             </div>

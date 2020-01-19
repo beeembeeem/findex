@@ -13,7 +13,7 @@ export const createPortfolio = `mutation CreatePortfolio(
       items {
         id
         name
-        price
+        symbol
         createdAt
       }
       nextToken
@@ -34,7 +34,7 @@ export const updatePortfolio = `mutation UpdatePortfolio(
       items {
         id
         name
-        price
+        symbol
         createdAt
       }
       nextToken
@@ -55,7 +55,7 @@ export const deletePortfolio = `mutation DeletePortfolio(
       items {
         id
         name
-        price
+        symbol
         createdAt
       }
       nextToken
@@ -107,7 +107,7 @@ export const createPortfolioStockList = `mutation CreatePortfolioStockList(
   createPortfolioStockList(input: $input, condition: $condition) {
     id
     name
-    price
+    symbol
     createdAt
     portfolio {
       id
@@ -128,7 +128,7 @@ export const updatePortfolioStockList = `mutation UpdatePortfolioStockList(
   updatePortfolioStockList(input: $input, condition: $condition) {
     id
     name
-    price
+    symbol
     createdAt
     portfolio {
       id
@@ -149,7 +149,7 @@ export const deletePortfolioStockList = `mutation DeletePortfolioStockList(
   deletePortfolioStockList(input: $input, condition: $condition) {
     id
     name
-    price
+    symbol
     createdAt
     portfolio {
       id

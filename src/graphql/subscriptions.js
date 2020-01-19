@@ -10,7 +10,7 @@ export const onCreatePortfolio = `subscription OnCreatePortfolio($owner: String!
       items {
         id
         name
-        price
+        symbol
         createdAt
       }
       nextToken
@@ -28,7 +28,7 @@ export const onUpdatePortfolio = `subscription OnUpdatePortfolio($owner: String!
       items {
         id
         name
-        price
+        symbol
         createdAt
       }
       nextToken
@@ -46,7 +46,7 @@ export const onDeletePortfolio = `subscription OnDeletePortfolio($owner: String!
       items {
         id
         name
-        price
+        symbol
         createdAt
       }
       nextToken
@@ -86,7 +86,7 @@ export const onCreatePortfolioStockList = `subscription OnCreatePortfolioStockLi
   onCreatePortfolioStockList {
     id
     name
-    price
+    symbol
     createdAt
     portfolio {
       id
@@ -104,7 +104,7 @@ export const onUpdatePortfolioStockList = `subscription OnUpdatePortfolioStockLi
   onUpdatePortfolioStockList {
     id
     name
-    price
+    symbol
     createdAt
     portfolio {
       id
@@ -122,7 +122,7 @@ export const onDeletePortfolioStockList = `subscription OnDeletePortfolioStockLi
   onDeletePortfolioStockList {
     id
     name
-    price
+    symbol
     createdAt
     portfolio {
       id
