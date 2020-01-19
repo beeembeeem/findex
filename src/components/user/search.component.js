@@ -137,7 +137,7 @@ class search extends Component {
               this.state.searchField &&
               this.state.searchStockList.map(item => (
                 <li class="list-group-item search-result-li d-flex justify-content-between align-items-center ">
-                  <span>
+                   <span>
                     <span
                       class={
                         item.data &&
@@ -156,9 +156,11 @@ class search extends Component {
                       }
                     >
                       {item._source.symbol}
-                    </span>
+</span>
+<span>
                     <p className="search-p m-0">{item._source.name}</p>
-                  </span>
+
+                    </span>
                   <span className="search-number-holder text-right">
                     <p className="m-0">
                       {item.data && item.data.profile ? (
@@ -174,6 +176,7 @@ class search extends Component {
                         <div className="data-loader-sm "></div>
                       )}
                     </p>
+                  </span>
                   </span>
                 </li>
               ))}
