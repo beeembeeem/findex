@@ -133,6 +133,32 @@ class search extends Component {
         />
         <div className="search-parent">
           <ul class="list-group search-list">
+            <li class="list-group-item search-result-li justify-content-between align-items-center ">
+              <p class="searchListItem ">ACER THERAPEUTICS INC</p>
+              <span class="badge searchListItem badge-dark badge-pill">
+                ACER
+              </span>
+            </li>
+            <li class="list-group-item search-result-li h-100 justify-content-between align-items-center ">
+              <p class="searchListItem my-2 ">ACER THERAPEUTICS INC</p>
+              <span class="badge searchListItem badge-dark badge-pill">
+                ACER
+              </span>
+            </li>
+            <li class="list-group-item search-result-li justify-content-between align-items-center ">
+              <div className="row">
+              <p class="searchListItem ">ACER THERAPEUTICS INC</p>
+              <span class="badge searchListItem badge-dark badge-pill">
+                ACER
+              </span></div>
+            </li>
+                        <li class="list-group-item search-result-li justify-content-between align-items-center ">
+              <div className="">
+              <p class="searchListItem ">ACER THERAPEUTICS INC</p>
+              <span class="badge searchListItem badge-dark badge-pill">
+                ACER
+              </span></div>
+            </li>
             {/* Dumping search match list */}
             {this.state.searchStockList != [] &&
               this.state.searchField &&
