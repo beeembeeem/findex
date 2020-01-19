@@ -142,7 +142,7 @@ class search extends Component {
                   class="list-group-item search-result-li  justify-content-between align-items-center "
                   onClick={e => this.searchClickHandler(e, item._source.symbol)}
                 >
-                  <p className="searchListItem m-0">{item._source.name}</p>
+                  <p className="searchListItem ">{item._source.name}</p>
 
                   <span
                     class={
