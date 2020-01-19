@@ -136,7 +136,7 @@ class search extends Component {
             {this.state.searchStockList != [] &&
               this.state.searchField &&
               this.state.searchStockList.map(item => (
-                <li class="list-group-item search-result-li d-flex justify-content-between align-items-center ">
+                <li class="list-group-item search-result-li  justify-content-between align-items-center ">
                    <div class="d-block ">
                     <span
                       class={
