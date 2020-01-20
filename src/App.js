@@ -45,7 +45,6 @@ class App extends React.Component {
     };
     return (
       !this.state.isAuthenticating && (
-        <div className="content">
           <Router>
             <Switch>
               <Route
@@ -70,9 +69,7 @@ class App extends React.Component {
               />
               <Route component={notFound} />
             </Switch>
-            <br />
           </Router>
-        </div>
       )
     );
   }

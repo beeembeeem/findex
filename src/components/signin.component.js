@@ -53,7 +53,7 @@ export default class signin extends Component {
       return (
         <div className="container">
           <div className="login-box mx-auto my-4 bg-light p-5">
-            <form onSubmit={this.handleSubmit}>
+            <form>
               {loginSetting.fields.map(item => (
                 <div key={item.id} className="form-group">
                   <label>{item.label}</label>
@@ -68,7 +68,7 @@ export default class signin extends Component {
                   ></input>
                 </div>
               ))}
-              <button type="submit" className="btn btn-primary" value="Submit">
+              <button type="submit" className="btn btn-primary"  onClick={this.handleSubmit}>
                 Submit
               </button>
             </form>

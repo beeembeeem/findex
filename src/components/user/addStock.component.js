@@ -74,7 +74,7 @@ class notFound extends Component {
     });
     const userinput = "*" + this.state.searchField + "*";
     var fields = [];
-    if (this.state.searchField.length < 5) {
+    if (this.state.searchField.length < 3) {
       fields = ["symbol^2", "name"];
     } else {
       fields = ["symbol", "name"];
@@ -83,7 +83,8 @@ class notFound extends Component {
       query: {
         query_string: {
           fields: fields,
-          query: userinput
+          query: userinput,
+          fuzziness:"AUTO"
         }
       },
       size: 100

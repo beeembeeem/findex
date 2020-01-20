@@ -3,7 +3,7 @@ import  { Auth, API, graphqlOperation } from 'aws-amplify';
 import navbarSettings from "../../settings/navbar";
 import { Link } from 'react-router-dom';
 
-class sidebar extends Component {
+class sidebarM extends Component {
   constructor(props) {
     super(props);
     this.state = {portfolioList : []};
@@ -24,7 +24,7 @@ class sidebar extends Component {
   render() {
     if (this.props.data.isAuthenticated){
         return (
-        <div className="sidebar col-2 d-lg-block d-none " data-active-color="rose" data-background-color="black" data-image="#">
+        <div className="sidebar col-5 mobile-bar d-lg-none " data-active-color="rose" data-background-color="black" data-image="#">
             <div className="logo text-center ">
 
         <a href="http://www.creative-tim.com" className="simple-text text-light logo-normal">
@@ -79,7 +79,7 @@ class sidebar extends Component {
   }
 }
 
-export default sidebar
+export default sidebarM
 
 
 

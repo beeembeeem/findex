@@ -1,3 +1,25 @@
+:root {
+  --main-color: #2c2e3a;
+  --secondary-color: #1c1e2f38;
+  --main-full: #2c2e3a;
+  --main-padding: 15px;
+}
+
+.portfolio-bg{
+  background-color: var(--secondary-color);
+  overflow-y: scroll;
+  overflow-x: hidden;
+  -webkit-overflow-scrolling: touch;
+  height: 100vh;
+
+}
+.mobile-bar{
+  position: absolute;
+  background-color: black;
+  top: 0;
+  bottom: 0;
+  height: 100vh;
+}
 body, html{
     width: 100%;
   height: 100%;
@@ -7,13 +29,24 @@ body, html{
   background-color: rgb(27,30,33,1);
   font-size: 100%;
 }
+button, [type="button"], [type="reset"], [type="submit"] {
+  -webkit-appearance: button;
+}
+button:not(:disabled), [type="button"]:not(:disabled), [type="reset"]:not(:disabled), [type="submit"]:not(:disabled) {
+  cursor: pointer;
+}
 .test2{
   max-height: 200px;
   max-width: 50px;
 }
+.align-self-center {
+  align-self: center !important;
+}
+
 .search-list{
   overflow-y: scroll;
   overflow-x: hidden;
+  -webkit-overflow-scrolling: touch;
   scrollbar-width: none; /* Firefox */
   -ms-overflow-style: none;  /* Internet Explorer 10+ */
   max-height: 220px;
@@ -21,6 +54,13 @@ body, html{
 }
 .search-list::-webkit-scrollbar { 
   display: none; /* Chrome Safari */
+}
+
+.navbar .navbar-menu-wrapper .navbar-toggler {
+  border: 0;
+  color: inherit;
+  font-size: 1.5rem;
+  padding: 0;
 }
 
 .form-holder{
@@ -35,6 +75,7 @@ body a, body a:hover{
 }
 .portfolio{
   box-shadow: 0 4px 15px rgba(53, 52, 52, 0.521);
+
 }
 .profile{
   background-color: rgb(18, 23, 24);
@@ -42,14 +83,38 @@ body a, body a:hover{
 
 }
 
-.content{
+#root{
   width: 100%;
   height: 100%;
-  position: relative;
   z-index: 100;
+  -webkit-box-shadow: none;
+  -moz-box-shadow: none;
+  box-shadow: none;
+}
+.navbar .navbar-brand-wrapper {
+  transition: width 0.25s ease, background 0.25s ease;
+  -webkit-transition: width 0.25s ease, background 0.25s ease;
+  -moz-transition: width 0.25s ease, background 0.25s ease;
+  -ms-transition: width 0.25s ease, background 0.25s ease;
+}
+.navbar .navbar-menu-wrapper {
+  transition: width 0.25s ease;
+  -webkit-transition: width 0.25s ease;
+  -moz-transition: width 0.25s ease;
+  -ms-transition: width 0.25s ease;
+  color: #606A96;
+  padding-left: 2.5rem;
+  padding-right: 2.5rem;
+  height: 59px;
+
 }
 .search-p{
   font-size: 0.8em;
+}
+.search-parent{
+  position: absolute;
+  left: 0;
+  right: 0;
 }
 .sidebar::before{
   background-image: url("./bg.jpg");
@@ -83,14 +148,11 @@ body a, body a:hover{
 
 }
 
+.navbar{
+  background:var(--main-color);
 
+}
 .sidebar{
-  width: 215px;
-  position: fixed;
-  left: 0;
-  top: 0;
-  bottom: 0;
-  display: none;
   box-shadow: 0 10px 5px -12px rgba(0, 0, 0, 0.42), 0 4px 5px 0px rgba(0, 0, 0, 0.12), 0 8px 5px -5px rgba(0, 0, 0, 0.2);
 
 }
@@ -245,12 +307,26 @@ body a, body a:hover{
 .navbar{
   
 }
+.SearchBar{
+  width: 100%;
+  position: relative;
+  display: inline-block;
+
+}
+.break {
+  flex-basis: 100%;
+  height: 0;
+}
+.SearchBarContainer{
+  padding-left: 1rem;
+  padding-right: 1rem;
+}
+.pull-right{
+  margin-left: auto;
+}
 /* Extra small devices (phones, 600px and down) */
 @media only screen and (max-width: 600px) {
-  .search-list{
-    max-height: 220px;
-  }
-  
+
 }
 
 /* Small devices (portrait tablets and large phones, 600px and up) */
@@ -265,28 +341,37 @@ body a, body a:hover{
 
 /* Large devices (laptops/desktops, 992px and up) */
 @media only screen and (min-width: 992px) {
-  .main{
-    position: relative;
-    float: right;
-    width: calc(100% - 200px);
-    height: 100%;
-    transition-property: top,bottom, width;
-  }
   .sidebar{
     display: block;
   }
   .navbarpadding{
     padding-left: 220px ;
   }
+  .wrap .main{
+    padding-top: 59px;
+    min-height: calc(100vh - 50px);  
+  }
+  
+  
 }
 .main{
-  display: block;
-  flex-wrap: wrap;
+  padding-top: 130px;
+  min-height: calc(100vh - 130px);
+  display: -webkit-flex;
+  display: flex;
+  -webkit-flex-direction: row;
+  flex-direction: row;
+  padding-left: 0;
+  padding-right: 0;
 }
 .wrap{
-  position: relative;
-  top: 0;
-  height: 100vh;
+  width: 100%;
+  height: 100%;
+  z-index: 100;
+  -webkit-box-shadow: none;
+  -moz-box-shadow: none;
+  box-shadow: none;
+  overflow: hidden;
 }
 .addPortfolioModal{
   position: fixed;
@@ -298,7 +383,13 @@ body a, body a:hover{
   top: 0;
   overflow-y: scroll;
   left: 0;
+  z-index: 1250;
 }
+.list-group-item{
+  background-color: var(--main-full);
+  color: grey;
+}
+
 .search-alert{
   opacity: 0;
   -webkit-transition: opacity 500ms linear;
@@ -307,7 +398,7 @@ body a, body a:hover{
   top: 20px;
   left: 25px;
   right: 25px;
-  z-index: 999;
+  z-index: 99999;
   max-width: 400px;
 }
 .searchListItem{
@@ -376,7 +467,7 @@ body a, body a:hover{
 
 }
 .expanding-all-div{
-  background-color: rgba(255, 255, 255, 0.842);
+  background-color: rgba(255, 255, 255, 0.055);
   z-index: 2;
 }
 .selected-stock-options{
@@ -412,12 +503,30 @@ body a, body a:hover{
     text-shadow: 0 1px 0 #fff;
     opacity: .5;
 }
+
+.mdi:before, .mdi-set {
+  display: inline-block;
+  font: normal normal normal 24px/1 "Material Design Icons";
+  font-size: inherit;
+  text-rendering: auto;
+  line-height: inherit;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+}
 .addPortfolioInner{
-  background-color: #fff;
+  color: white;
+  background-color: var(--main-full);
   width: 100%;
   max-width: 800px;
   margin: auto;
-  margin-top: 50px;
+  margin-top: 20vh;
+  z-index: 1200;
+}
+.portfolio .card-header .close span{
+  color: black;
+}
+.close span{
+  color: white;
 }
 .card-header-title {
   display: inline;

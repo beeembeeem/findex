@@ -83,7 +83,7 @@ class Portfolio extends Component {
     if (this.props.data.isAuthenticated) {
       console.log(this.state);
       return (
-        <div className="col-md-8 col-12 order-2 order-md-1">
+        <div className=" portfolio-bg col-12 col-lg-10 order-2 order-md-1">
           {this.state.redirectToAddPortfolio && (
             <AddPortfolio
               data={this.props.data}
@@ -164,6 +164,9 @@ class Portfolio extends Component {
               )}
             </div>
           </div>
+          <br/><br/><br/><br/><br/><br/><br/><br/><br/><br/><br/><br/><br/><br/><br/><br/><br/><br/><br/><br/><br/><br/><br/><br/><br/><br/><br/>
+          <br/><br/><br/><br/><br/><br/><br/><br/><br/><br/><br/><br/><br/><br/><br/><br/><br/><br/><br/>
+          asdasd<br/><br/><br/><br/><br/><br/><br/><br/><br/><br/><br/><br/><br/><br/><br/>sada<br/>
         </div>
       );
     } else {

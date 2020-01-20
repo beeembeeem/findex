@@ -3,93 +3,68 @@ import { Link } from "react-router-dom";
 import navbarSettings from "../settings/navbar";
 import Search from "./user/search.component.js";
 import Sidebar from "./user/sidebar.component";
+import SidebarM from "./user/sidebar-m.component";
 
 export default class Navbar extends Component {
   constructor(props) {
     super(props);
     this.state = {
-      toggle: true};
+      toggle: true,
+      showMobileBar:false
+    };
   }
-     
+
   handleToggle = () => {
     this.setState({
       toggle: !this.state.toggle
     });
-  }
+  };
   componentDidMount() {}
-
+  handleSideBar = (e) =>{
+    e.preventDefault()
+    const mobile = window.innerWidth <992
+    if(mobile){
+      this.setState({
+        showMobileBar:!this.state.showMobileBar
+      })
+    } else{
+      this.props.trigger.triggerSide()
+    }
+    console.log(window.innerWidth)
+  }
   render() {
     if (this.props.data.isAuthenticated) {
-      this.navbar = [];
+      this.navbar = navbarSettings.items_auth;
       this.buttons = navbarSettings.buttons_auth;
     } else {
       this.navbar = navbarSettings.items_unauth;
       this.buttons = navbarSettings.buttons_unauth;
     }
-
+    console.log(this.props)
     return (
-      <div
-        className={
-          this.props.data.isAuthenticated == true ? " container-fluid" : ""
-        }
-      >
-        <nav className=" navbar  px-0  navbar-dark  navbar-expand-lg">
-          <div className="logo   justify-content-between w-100">
-                      <Search data={this.props.data} />
-            <button
-              className="navbar-toggler"
-              type="button"
-              onClick={this.handleToggle}
-            >
-              <span className="navbar-toggler-icon"></span>
-            </button>
-          </div>
-          <div
-            className="collpase navbar-collapse  m-0 p-0 py-2 py-lg-0"
-            id="collapse"
-            style={
-              this.state.toggle ? { display: "block" } : { display: "none" }
-            }
-          >
-            {!this.props.data.isAuthenticated && (
-              <ul className="navbar-nav  d-none">
-                {this.navbar.map(item => (
-                  <li key={item.id} className={"navbar-item px-3 "}>
-                    <Link
-                      to={{
-                        pathname: item.url
-                      }}
-                      className="nav-link"
-                    >
-                      {item.name}
-                    </Link>
-                  </li>
-                ))}
-              </ul>
-            )}
-            <div className="col-sm-4 col-12 text-right p-2">
-              {this.buttons.map(item => (
-                <Link
-                  key={item.id}
-                  to={{
-                    pathname: item.url
-                  }}
-                  className="p-2  "
-                >
-                  <button
-                    name="options"
-                    id="option1"
-                    className="btn btn-outline-secondary px-2 p-1 "
-                  >
-                    {" "}
-                    <p className="m-0 p-0 px-3">{item.name}</p>
-                  </button>
-                </Link>
-              ))}
-            </div>
-          </div>
-        </nav>
-      </div>
+      <nav className="navbar col-lg-12 col-12 p-0 fixed-top  ">
+      {/* Logo Section */}
+        <div className="text-center navbar-brand-wrapper col-6  col-md-4 col-lg-2 align-items-center justify-content-center ">
+          <h5 className="navbar-brand text-light m-0">Invex.AI</h5>
+        </div>
+        {/* Top Bar section */}
+        <div className="navbar-menu-wrapper px-0 row col-6 col-md-8 col-lg-10 align-items-center justify-content-end">
+        <button class="navbar-toggler col-lg-1 col-8 ml-auto mr-lg-auto ml-lg-0 navbar-toggler align-self-center" type="button" onClick={this.handleSideBar} data-toggle="minimize">
+          <span class="mdi mdi-menu"><i class="fas fa-bars"></i>
+</span>
+        </button>
+              <div className="SearchBarContainer d-none d-lg-block col-lg-8">
+          <Search/></div>
+        <div class=" pull-right d-none d-lg-block col-lg-3">
+    asdasd
+    asdasd
+        </div>
+        </div>
+        <div className="col-12 d-lg-none py-3 rounded">
+                  <Search/>
+        </div>
+        {this.state.showMobileBar? <SidebarM data={this.props.data}/> : ""}
+      </nav>
     );
   }
 }

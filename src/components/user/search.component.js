@@ -121,77 +121,85 @@ class search extends Component {
   render() {
     console.log(this.state);
     return (
-      <div className="w-100 pr-2">
-        <input
-          className="form-control w-100 pr-2 d-inline form-control-dark"
-          type="text"
-          autocomplete="off"
-          type="search"
-          name="searchField"
-          placeholder="Find Portfolios, Equities, or Profiles"
-          onChange={this.searchHandle}
-        />
-        <div className="search-parent">
-          <ul class="list-group search-list">
-            {/* Dumping search match list */}
-            {this.state.searchStockList != [] &&
-              this.state.searchField &&
-              this.state.searchStockList.map(item => (
-                <li
-                  class="list-group-item search-result-li  justify-content-between align-items-center "
-                  onClick={e => this.searchClickHandler(e, item._source.symbol)}
-                >
-                  <div className="row">
-                    {/* Stock Symbol Display */}
-                    <div className="col-4">
-                      <span
-                        class={
-                          item.data &&
-                          item.data.profile &&
-                          item.data.profile.changes > 0
-                            ? "badge searchListItem badge-success badge-pill valid-data-high"
-                            : item.data &&
-                              item.data.profile &&
-                              item.data.profile.changes < 0
-                            ? "badge searchListItem badge-danger badge-pill valid-data-low"
-                            : item.data &&
-                              item.data.profile &&
-                              item.data.profile.changes == 0
-                            ? "badge searchListItem badge-dark badge-pill"
-                            : "badge searchListItem badge-light badge-pill invalid-data"
-                        }
-                      >
-                        {item._source.symbol}
-                      </span>
-                    </div>
-                    {/* Stock Price Display */}
-                    <div className="col-8 text-right">
-                      {item.data &&
-                        item.data.profile &&
-                        item.data.profile.price}
-                    </div>
-                  </div>
-                  <div className="row">
-                    {/* Stock Name Display */}
-                    <div className="col-6 ">
-                      
-                      {item.data && item.data.profile && item.data.profile.companyName}
-                    </div>
-                    {/* Stock Change Display */}
-                    <div className="col-6 text-right">
-                      <p className="">
+        <div className="SearchBar">
+          <input
+            className="form-control w-100  d-inline form-control-dark"
+            type="text"
+            autocomplete="off"
+            type="search"
+            name="searchField"
+            placeholder="Find Portfolios, Equities, or Profiles"
+            onChange={this.searchHandle}
+          />
+          <div className="search-parent">
+            <ul class="list-group search-list">
+              {/* TEST UNIT FOR LI */}
+              {/* <li class="list-group-item search-result-li  justify-content-between align-items-center ">
+              {" "}
+              TEST
+            </li> */}
+              {/* Dumping search match list */}
+              {this.state.searchStockList != [] &&
+                this.state.searchField &&
+                this.state.searchStockList.map(item => (
+                  <li
+                    class="list-group-item search-result-li  justify-content-between align-items-center "
+                    onClick={e =>
+                      this.searchClickHandler(e, item._source.symbol)
+                    }
+                  >
+                    <div className="row">
+                      {/* Stock Symbol Display */}
+                      <div className="col-4">
+                        <span
+                          class={
+                            item.data &&
+                            item.data.profile &&
+                            item.data.profile.changes > 0
+                              ? "badge searchListItem badge-success badge-pill valid-data-high"
+                              : item.data &&
+                                item.data.profile &&
+                                item.data.profile.changes < 0
+                              ? "badge searchListItem badge-danger badge-pill valid-data-low"
+                              : item.data &&
+                                item.data.profile &&
+                                item.data.profile.changes == 0
+                              ? "badge searchListItem badge-dark badge-pill"
+                              : "badge searchListItem badge-light badge-pill invalid-data"
+                          }
+                        >
+                          {item._source.symbol}
+                        </span>
+                      </div>
+                      {/* Stock Price Display */}
+                      <div className="col-8 text-right">
                         {item.data &&
                           item.data.profile &&
-                          item.data.profile.changes +
-                            item.data.profile.changesPercentage}
-                      </p>
+                          item.data.profile.price}
+                      </div>
                     </div>
-                  </div>
-                </li>
-              ))}
-          </ul>
+                    <div className="row">
+                      {/* Stock Name Display */}
+                      <div className="col-6 ">
+                        {item.data &&
+                          item.data.profile &&
+                          item.data.profile.companyName}
+                      </div>
+                      {/* Stock Change Display */}
+                      <div className="col-6 text-right">
+                        <p className="">
+                          {item.data &&
+                            item.data.profile &&
+                            item.data.profile.changes +
+                              item.data.profile.changesPercentage}
+                        </p>
+                      </div>
+                    </div>
+                  </li>
+                ))}
+            </ul>
+          </div>
         </div>
-      </div>
     );
   }
 }
