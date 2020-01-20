@@ -7,11 +7,10 @@
 
 .portfolio-bg{
   background-color: var(--secondary-color);
+
   overflow-y: scroll;
   overflow-x: hidden;
   -webkit-overflow-scrolling: touch;
-  height: 100vh;
-
 }
 .mobile-bar{
   position: absolute;
@@ -362,6 +361,10 @@ body a, body a:hover{
   flex-direction: row;
   padding-left: 0;
   padding-right: 0;
+  overflow-y: hidden;
+  overflow-x: hidden;
+  height: 100vh;
+  
 }
 .wrap{
   width: 100%;
@@ -370,8 +373,10 @@ body a, body a:hover{
   -webkit-box-shadow: none;
   -moz-box-shadow: none;
   box-shadow: none;
-  overflow: hidden;
-}
+  overflow-y: scroll;
+  overflow-x: hidden;
+  -webkit-overflow-scrolling: touch;
+ }
 .addPortfolioModal{
   position: fixed;
   z-index: 55;
