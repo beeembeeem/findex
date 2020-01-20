@@ -348,14 +348,13 @@ body a, body a:hover{
     padding-left: 220px ;
   }
   .wrap .main{
-    padding-top: 59px;
-    min-height: calc(100vh - 50px);  
-  }
+    height:100%;
+    }
   
   
 }
 .main{
-  min-height: calc(100vh - 130px);
+  height:100%;
   display: -webkit-flex;
   display: flex;
   -webkit-flex-direction: row;
