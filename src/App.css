@@ -355,7 +355,6 @@ body a, body a:hover{
   
 }
 .main{
-  padding-top: 130px;
   min-height: calc(100vh - 130px);
   display: -webkit-flex;
   display: flex;

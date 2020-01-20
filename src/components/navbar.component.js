@@ -42,7 +42,7 @@ export default class Navbar extends Component {
     }
     console.log(this.props)
     return (
-      <nav className="navbar col-lg-12 col-12 p-0 fixed-top  ">
+      <nav className="navbar col-lg-12 col-12 p-0   ">
       {/* Logo Section */}
         <div className="text-center navbar-brand-wrapper col-6  col-md-4 col-lg-2 align-items-center justify-content-center ">
           <h5 className="navbar-brand text-light m-0">Invex.AI</h5>

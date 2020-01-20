@@ -83,7 +83,7 @@ class Portfolio extends Component {
     if (this.props.data.isAuthenticated) {
       console.log(this.state);
       return (
-        <div className=" portfolio-bg col-12 col-lg-10 order-2 order-md-1">
+        <div className={this.props.trigger.slimSide? " portfolio-bg col-12 col-lg-11 order-2 order-md-1" : " portfolio-bg col-12 col-lg-10 order-2 order-md-1"}>
           {this.state.redirectToAddPortfolio && (
             <AddPortfolio
               data={this.props.data}
