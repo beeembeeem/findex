@@ -60,7 +60,7 @@ export default class Navbar extends Component {
     asdasd
         </div>
         </div>
-        <div className="col-12 d-lg-none py-3 rounded">
+        <div className="col-12 d-lg-none pb-2 rounded">
                   <Search/>
         </div>
         {this.state.showMobileBar? <SidebarM data={this.props.data}/> : ""}
