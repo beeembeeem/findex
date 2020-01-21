@@ -29,8 +29,8 @@ const navbarSettings = {
     ,
     items_auth : [
         {   id: 1,
-            name: 'Account' ,
-            url: '/account'},
+            name: 'Dashboard' ,
+            url: '/'},
         {   id: 2,
             name: 'Sign Out' ,
             url: '/signout'},

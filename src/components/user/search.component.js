@@ -1,4 +1,7 @@
 import React, { Component } from "react";
+import {
+  Redirect, withRouter
+} from "react-router-dom";
 
 class search extends Component {
   constructor(props) {
@@ -117,7 +120,17 @@ class search extends Component {
       }, 300);
     }
   };
-
+searchClickHandler = (e,item) =>{
+const itemString = JSON.stringify(item);
+console.log(itemString)
+this.setState({
+  searchField:""
+})
+this.props.history.push({
+  pathname : `/equ/${item._source.symbol}`,
+  state : item.data
+})
+}
   render() {
     console.log(this.state);
     return (
@@ -145,7 +158,7 @@ class search extends Component {
                   <li
                     class="list-group-item search-result-li  justify-content-between align-items-center "
                     onClick={e =>
-                      this.searchClickHandler(e, item._source.symbol)
+                      this.searchClickHandler(e, item)
                     }
                   >
                     <div className="row">
@@ -205,4 +218,4 @@ class search extends Component {
   }
 }
 
-export default search;
+export default withRouter(search);

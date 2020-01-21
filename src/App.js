@@ -7,6 +7,7 @@ import Signin from "./components/signin.component";
 import notFound from "./components/404.component";
 import Signout from "./components/signout.component";
 import { Auth } from "aws-amplify";
+import EQU from "./components/EQU.component";
 
 class App extends React.Component {
   constructor(props) {
@@ -45,31 +46,36 @@ class App extends React.Component {
     };
     return (
       !this.state.isAuthenticating && (
-          <Router>
-            <Switch>
-              <Route
-                exact
-                path="/"
-                render={(...props) => <Index data={authProps} />}
-              />
-              <Route
-                exact
-                path="/signout"
-                render={(...props) => <Signout data={authProps} />}
-              />
-              <Route
-                exact
-                path="/signup"
-                render={(...props) => <Signup data={authProps} />}
-              />
-              <Route
-                exact
-                path="/signin"
-                render={(...props) => <Signin data={authProps} />}
-              />
-              <Route component={notFound} />
-            </Switch>
-          </Router>
+        <Router>
+          <Switch>
+            <Route
+              exact
+              path="/"
+              render={(...props) => <Index data={authProps} />}
+            />
+            <Route
+              exact
+              path="/signout"
+              render={(...props) => <Signout data={authProps} />}
+            />
+            <Route
+              exact
+              path="/signup"
+              render={(...props) => <Signup data={authProps} />}
+            />
+            <Route
+              exact
+              path="/equ/:stockProfile"
+              render={(...props) => <EQU data={authProps} />}
+            />
+            <Route
+              exact
+              path="/signin"
+              render={(...props) => <Signin data={authProps} />}
+            />
+            <Route component={notFound} />
+          </Switch>
+        </Router>
       )
     );
   }

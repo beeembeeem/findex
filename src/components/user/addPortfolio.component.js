@@ -33,7 +33,15 @@ class addPortfolio extends Component {
 
   createPortfolio = async e => {
     e.preventDefault();
-    if (this.props.data.isAuthenticated) {
+    if (!this.state.name || !this.state.type) {
+      this.setState({
+        noInputAlert: true
+      });
+    } else if (
+      this.props.data.isAuthenticated &&
+      this.state.name &&
+      this.state.type
+    ) {
       try {
         const result = await API.graphql(
           graphqlOperation(mutations.createPortfolio, {
@@ -46,22 +54,24 @@ class addPortfolio extends Component {
         const ID = result.data.createPortfolio.id;
         const stocks = JSON.stringify(this.state.searchStockList);
         const name = result.data.createPortfolio.type;
-        const addStockResult = await API.graphql(graphqlOperation(
-          mutations.createPortfolioStockList,{
+        const addStockResult = await API.graphql(
+          graphqlOperation(mutations.createPortfolioStockList, {
             input: {
-              name : name,
+              name: name,
               symbol: stocks,
               createdAt: "Now",
               portfolioStockListPortfolioId: ID
             }
-          }
-        ));
+          })
+        );
 
         console.log("Added Stocklist succesfully");
         console.log(addStockResult);
+        this.props.work.redirectToAddPortfolio_f();
       } catch (error) {
         console.log(error);
       }
+    } else {
     }
   };
   setSearchStockList = list => {
@@ -87,6 +97,20 @@ class addPortfolio extends Component {
           </div>
           <div className="row mx-0 px-2 pb-4">
             <form className="card-body col-12 col-lg-6 form-holder ">
+              {this.state.noInputAlert && (!this.state.name||!this.state.type) ? (
+                <div class="alert alert-danger" role="alert">
+                  Your portfolio must have{" "}
+                  {!this.state.name && !this.state.type
+                    ? "a name and a type"
+                    : !this.state.name
+                    ? "a name"
+                    : !this.state.type
+                    ? "a type"
+                    : ""}
+                </div>
+              ) : (
+                ""
+              )}
               {this.portfolioSettings.addPortfolioFields.map(item => (
                 <div className="form-group col-12 col-mg-6  " key={item.id}>
                   <label htmlFor={item.label}>{item.label}</label>

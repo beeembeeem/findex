@@ -150,9 +150,7 @@ class Portfolio extends Component {
                                 selectedStockList : JSON.parse(item.stocks.items[0].symbol)
                               }}/>
                         )}
-                        <button className="btn btn-secondary btn-sm py-1">
-                          Add Equity
-                        </button>
+
                       </div>
                     </div>
                   </div>

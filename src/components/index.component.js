@@ -53,7 +53,7 @@ class Index extends Component {
 
         <div className="wrap">
           <Navbar data={this.props.data} ></Navbar>
-          <div className="container-fluid main">
+          <div className="container-fluid main ">
 
         </div>        </div>
 
