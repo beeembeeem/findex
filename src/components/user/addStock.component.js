@@ -139,6 +139,7 @@ class notFound extends Component {
         clearTimeout(this.alertTimeOut);
       }
       document.getElementsByClassName("search-alert")[0].style.opacity = 1;
+      this.props.searchStockList.setSearchStockList(item)
       this.setState(
         {
           selectedStockList: item,

@@ -42,11 +42,32 @@ class addPortfolio extends Component {
         );
         console.log("Added Portfolio succesfully");
         console.log(result);
-        this.props.work.redirectToAddPortfolio_f();
+
+        const ID = result.data.createPortfolio.id;
+        const stocks = JSON.stringify(this.state.searchStockList);
+        const name = result.data.createPortfolio.type;
+        const addStockResult = await API.graphql(graphqlOperation(
+          mutations.createPortfolioStockList,{
+            input: {
+              name : name,
+              symbol: stocks,
+              createdAt: "Now",
+              portfolioStockListPortfolioId: ID
+            }
+          }
+        ));
+
+        console.log("Added Stocklist succesfully");
+        console.log(addStockResult);
       } catch (error) {
         console.log(error);
       }
     }
+  };
+  setSearchStockList = list => {
+    this.setState({
+      searchStockList: list
+    });
   };
   render() {
     console.log("render");
@@ -87,7 +108,9 @@ class addPortfolio extends Component {
                 </div>
               ))}
             </form>
-            <AddStock />
+            <AddStock
+              searchStockList={{ setSearchStockList: this.setSearchStockList }}
+            />
             <div className="col-12 col-lg-4">
               <button
                 type="submit"

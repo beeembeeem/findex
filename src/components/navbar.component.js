@@ -44,26 +44,24 @@ export default class Navbar extends Component {
     return (
       <nav className="navbar col-lg-12 col-12 p-0   ">
       {/* Logo Section */}
-        <div className="text-center navbar-brand-wrapper col-6  col-md-4 col-lg-2 align-items-center justify-content-center ">
+        <div className="text-center navbar-brand-wrapper col-3  col-md-4 col-lg-2 align-items-center justify-content-center ">
           <h5 className="navbar-brand text-light m-0">Invex.AI</h5>
         </div>
         {/* Top Bar section */}
-        <div className="navbar-menu-wrapper px-0 row col-6 col-md-8 col-lg-10 align-items-center justify-content-end">
-        <button class="navbar-toggler col-lg-1 col-8 ml-auto mr-lg-auto ml-lg-0 navbar-toggler align-self-center" type="button" onClick={this.handleSideBar} data-toggle="minimize">
+        <div className="navbar-menu-wrapper px-0  row col-9 col-md-8 col-lg-10 align-items-center justify-content-end">
+        <button class="navbar-toggler d-none d-lg-block  col-lg-1 d-ml-auto mr-lg-auto ml-lg-0 navbar-toggler align-self-center" type="button" onClick={this.handleSideBar} data-toggle="minimize">
           <span class="mdi mdi-menu"><i class="fas fa-bars"></i>
 </span>
         </button>
-              <div className="SearchBarContainer d-none d-lg-block col-lg-8">
+              <div className=" pl-0 col-12 col-lg-8">
           <Search/></div>
         <div class=" pull-right d-none d-lg-block col-lg-3">
     asdasd
     asdasd
         </div>
         </div>
-        <div className="col-12 d-lg-none pb-2 rounded">
-                  <Search/>
-        </div>
-        {this.state.showMobileBar? <SidebarM data={this.props.data}/> : ""}
+
+        <SidebarM data={this.props.data} trigger = { {showMobileBar:this.state.showMobileBar}}/> 
       </nav>
     );
   }

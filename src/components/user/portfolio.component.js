@@ -4,6 +4,7 @@ import AddPortfolio from "./addPortfolio.component";
 import DeletePortfolio from "./deletePortfolio.component";
 import * as subscriptions from "../../graphql/subscriptions";
 import { DashboardPortfolios } from "./functions/custom_queries";
+import StockListDisplay from "./stockListDisplay.component"
 class Portfolio extends Component {
   constructor(props) {
     super(props);
@@ -83,7 +84,7 @@ class Portfolio extends Component {
     if (this.props.data.isAuthenticated) {
       console.log(this.state);
       return (
-        <div className={this.props.trigger.slimSide? " portfolio-bg col-12 col-lg-11 order-2 order-md-1" : " portfolio-bg col-12 col-lg-10 order-2 order-md-1"}>
+        <div className={this.props.trigger.slimSide? " portfolio-bg col-12 col-lg-12 order-2 order-md-1" : " portfolio-bg col-12 col-lg-10 order-2 order-md-1"}>
           {this.state.redirectToAddPortfolio && (
             <AddPortfolio
               data={this.props.data}
@@ -140,19 +141,14 @@ class Portfolio extends Component {
                         <h6 className="card-header-title"> {item.name}</h6>
                       </div>
                       <div className="card-body">
-                        {item.stocks.items.length == 0 ? (
+                        {item.stocks.items.length == 0 || JSON.parse(item.stocks.items[0].symbol).length == 0? (
                           <div className="noEQ">
                             This portfolio has no equities
                           </div>
                         ) : (
-                          item.stocks.items.map(stock => (
-                            <div
-                              key={stock.id}
-                              className="col-6 rounded text-center border-top border-danger bg-dark text-light"
-                            >
-                              <p className="p-1">{stock.name}</p>
-                            </div>
-                          ))
+                              <StockListDisplay searchStockList = {{
+                                selectedStockList : JSON.parse(item.stocks.items[0].symbol)
+                              }}/>
                         )}
                         <button className="btn btn-secondary btn-sm py-1">
                           Add Equity

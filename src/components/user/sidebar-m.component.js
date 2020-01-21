@@ -24,7 +24,7 @@ class sidebarM extends Component {
   render() {
     if (this.props.data.isAuthenticated){
         return (
-        <div className="sidebar col-5 mobile-bar d-lg-none " data-active-color="rose" data-background-color="black" data-image="#">
+        <div className= {this.props.trigger.showMobileBar?"sidebar col-5 mobile-bar d-lg-none bar-show" : "sidebar col-5 mobile-bar d-lg-none"} data-active-color="rose" data-background-color="black" data-image="#">
             <div className="logo text-center ">
 
         <a href="http://www.creative-tim.com" className="simple-text text-light logo-normal">

@@ -33,7 +33,7 @@ class Index extends Component {
   render() {
     console.log(this.props);
     const triggerObject = {
-      slimSide: this.state.slimSide,
+      slimSide:this.state.slimSide,
       triggerSide : this.triggerSide
     }
     if (this.props.data.isAuthenticated) {
@@ -43,7 +43,7 @@ class Index extends Component {
 
           <div className="container-fluid main">
             {" "}
-            {this.state.slimSide? "SLIM" : <Sidebar data={this.props.data}/>}
+            {this.state.slimSide?"": <Sidebar data={this.props.data}/>}
             <Portfolio data={this.props.data} trigger = {triggerObject} />
           </div>
         </div>
