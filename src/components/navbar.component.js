@@ -43,6 +43,28 @@ export default class Navbar extends Component {
     console.log(this.props);
     return (
       <nav className="navbar row py-0  ">
+        {/* Handle Mobile Bar */}
+        <div className="row fixed-bottom mobile-bar  p-2 text-center d-lg-none">
+          {" "}
+          <div className="col d-flex justify-content-around p-0">
+            {this.props.data.isAuthenticated
+              ? navbarSettings.items_auth.map(each => (
+                  <a href={each.url}>
+                    <button type="button" class="btn btn-outline-info btn-sm">
+                      {each.name}
+                    </button>
+                  </a>
+                ))
+              : navbarSettings.items_unauth.map(each => (
+                  <div className="col d-flex justify-content-around p-0" key={each.id}>
+                  <a href={each.url}>
+                    <button type="button" class="btn btn-outline-info btn-sm">
+                      {each.name}
+                    </button>
+                  </a>                  </div>
+                ))}
+          </div>
+        </div>
         {/* Logo Section */}
         <div className="text-center navbar-brand-wrapper col-2 text-light col-md-4 col-lg-2 align-items-center justify-content-center ">
           INVX
@@ -68,18 +90,24 @@ export default class Navbar extends Component {
           <div className="col-12 col-lg-8">
             <Search />
           </div>
-          <div class={this.props.data.isAuthenticated?" justify-content-center d-none d-lg-flex col-lg-3":" justify-content-center d-none d-lg-flex col-lg-4"}>
-            {this.props.data.isAuthenticated?(
-              navbarSettings.items_auth.map( (each) =>(
-                <div className="col d-inline" key={each.id} >
-                <a href={each.url}>{each.name}</a>
-                </div>
-              ))
-            ):              navbarSettings.items_unauth.map( (each) =>(
-                <div className="col d-inline" key={each.id} >
-                <a href={each.url}>{each.name}</a>
-                </div>
-              ))}
+          <div
+            class={
+              this.props.data.isAuthenticated
+                ? " justify-content-center d-none d-lg-flex col-lg-3"
+                : " justify-content-center d-none d-lg-flex col-lg-4"
+            }
+          >
+            {this.props.data.isAuthenticated
+              ? navbarSettings.items_auth.map(each => (
+                  <div className="col d-inline" key={each.id}>
+                    <a href={each.url}>{each.name}</a>
+                  </div>
+                ))
+              : navbarSettings.items_unauth.map(each => (
+                  <div className="col d-inline" key={each.id}>
+                    <a href={each.url}>{each.name}</a>
+                  </div>
+                ))}
           </div>
         </div>
         {/* Side bar Load if logged in */}

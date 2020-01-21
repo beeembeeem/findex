@@ -52,9 +52,9 @@ export default class signin extends Component {
     } else {
       return (
         
-        <div className="">
+        <div className="wrap">
                   <Navbar data={this.props.data} ></Navbar>
-          <div className="login-box mx-auto my-4 bg-light p-5">
+          <div className="login-box mx-auto my-4 text-light p-5">
             <form>
               {loginSetting.fields.map(item => (
                 <div key={item.id} className="form-group">
@@ -70,7 +70,7 @@ export default class signin extends Component {
                   ></input>
                 </div>
               ))}
-              <button type="submit" className="btn btn-primary"  onClick={this.handleSubmit}>
+              <button type="submit" className="btn btn-info"  onClick={this.handleSubmit}>
                 Submit
               </button>
             </form>

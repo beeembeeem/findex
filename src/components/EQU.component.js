@@ -117,9 +117,9 @@ class EQU extends Component {
     console.log(this.state);
     console.log(this.props);
     return (
-      <div className="">
+      <div className="wrap">
         <Navbar data={this.props.data}></Navbar>
-        <div className="container mt-md-3 mt-lg-4  bg-dark p-3">
+        <div className="container mt-md-3 mt-lg-4  bg-dark p-3 pb-5">
           {!this.state.stockProfile ? (
             <div className="data-loader"> </div>
           ) : (
@@ -136,8 +136,8 @@ class EQU extends Component {
                         {this.state.stockProfile.price} USD{" "}
                       </div>
                       <div className="col-12 smallerText">
-                        {this.state.stockProfile.changes} 
-                        {this.state.stockProfile.changesPercentage}{" "}
+                        {this.state.stockProfile.changes} {" "}
+                        {this.state.stockProfile.changesPercentage}
                       </div>
                     </div>
                   </div>
@@ -192,7 +192,7 @@ class EQU extends Component {
                     </div>
                   </div>
                   <div className="col-12 py-3 text-center">
-                  <a href={`https://google.com/search?q=${this.state.stockSymbol}`}>
+                  <a href={`https://google.com/search?q=${this.state.stockSymbol}`} target="_blank">
                     <button type="button" class="btn btn-outline-info" >
                       Search Google for {this.state.stockSymbol}
                     </button></a>

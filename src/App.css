@@ -10,17 +10,10 @@
 
 }
 .mobile-bar{
-  position: absolute;
-  background-color: black;
-  top: 0;
-  bottom: 0;
-  height: 100vh;
   z-index: 9999;
-  width: 0px;
-  padding: 0;
   -webkit-transition: all 0.5s ease-in-out; /* For Safari 3.1 to 6.0 */
   transition: all 0.5s ease-in-out;
-
+  background-color: var(--main-color);
 }
 body, html{
     width: 100%;
