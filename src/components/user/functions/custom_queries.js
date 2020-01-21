@@ -1,4 +1,6 @@
-export const DashboardPortfolios = `query{listPortfolios{
+export const DashboardPortfolios = `query{listPortfolios(
+  limit:50
+){
     items{
       id
       name

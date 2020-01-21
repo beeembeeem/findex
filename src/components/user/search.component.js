@@ -121,9 +121,9 @@ class search extends Component {
   render() {
     console.log(this.state);
     return (
-        <div className="SearchBar">
+        <div className="col-12 pl-0">
           <input
-            className="form-control w-100  d-inline form-control-dark"
+            className="form-control col-12  d-inline form-control-dark"
             type="text"
             autocomplete="off"
             type="search"
@@ -187,13 +187,14 @@ class search extends Component {
                       </div>
                       {/* Stock Change Display */}
                       <div className="col-6 text-right">
-                        <p className="">
-                          {item.data &&
-                            item.data.profile &&
-                            item.data.profile.changes +
-                              item.data.profile.changesPercentage}
-                        </p>
-                      </div>
+                        {item.data && item.data.profile ? (
+                          item.data.profile.changes +
+                          item.data.profile.changesPercentage
+                        ) : this.state.loadingSearch ? (
+                          <div className="data-loader-sm"></div>
+                        ) : (
+                          " "
+                        )}                      </div>
                     </div>
                   </li>
                 ))}

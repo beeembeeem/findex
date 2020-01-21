@@ -20,25 +20,20 @@ const navbarSettings = {
             name: 'Home' ,
             url: '/'},
         {   id: 2,
-            name: 'Services' ,
+            name: 'Sign In' ,
             url: '/signin'},
         {   id: 3,
-            name:'Documentation', 
-            url: '/signup'} ,
-        {
-            id :4,
-            name: 'About',
-            url:'/hell'
-        }  
+            name:'Sign Up', 
+            url: '/signup'} 
      ]
     ,
     items_auth : [
         {   id: 1,
-            name: 'Home' ,
-            url: '/'},
-        {   id: 2,
             name: 'Account' ,
             url: '/account'},
+        {   id: 2,
+            name: 'Sign Out' ,
+            url: '/signout'},
         {   id: 3,
             name:'Help', 
             url: '/help'} 

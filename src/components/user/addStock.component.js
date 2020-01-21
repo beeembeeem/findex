@@ -341,7 +341,6 @@ class notFound extends Component {
                     </div>
                     {/* Stock Change Display */}
                     <div className="col-6 text-right">
-                      <p className="">
                         {item.data && item.data.profile ? (
                           item.data.profile.changes +
                           item.data.profile.changesPercentage
@@ -350,7 +349,6 @@ class notFound extends Component {
                         ) : (
                           " "
                         )}
-                      </p>
                     </div>
                   </div>
                 </li>

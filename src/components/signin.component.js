@@ -1,5 +1,5 @@
 import React, { Component } from "react";
-// import { Link } from 'react-router-dom';
+import Navbar from "../components/navbar.component";
 import loginSetting from "../settings/login";
 import { Auth } from "aws-amplify";
 global.fetch("node-fetch");
@@ -51,7 +51,9 @@ export default class signin extends Component {
       )
     } else {
       return (
-        <div className="container">
+        
+        <div className="">
+                  <Navbar data={this.props.data} ></Navbar>
           <div className="login-box mx-auto my-4 bg-light p-5">
             <form>
               {loginSetting.fields.map(item => (

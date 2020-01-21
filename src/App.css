@@ -116,7 +116,7 @@ body a, body a:hover{
 .search-parent{
   position: absolute;
   left: 0;
-  right: 15px;
+  right: 0;
 }
 .sidebar::before{
   background-image: url("./bg.jpg");
@@ -316,7 +316,6 @@ body a, body a:hover{
   width: 100%;
   position: relative;
   display: inline-block;
-  padding-right: 15px;
 }
 .break {
   flex-basis: 100%;
@@ -360,7 +359,7 @@ body a, body a:hover{
   .portfolio-bg{
     overflow-y: scroll;
     overflow-x: hidden;
-    -webkit-overflow-scrolling: touch;  
+    -webkit-overflow-scrolling: touch; 
   }
   
 }
@@ -403,6 +402,9 @@ body a, body a:hover{
 .list-group-item{
   background-color: var(--main-full);
   color: grey;
+  font-size: 0.8em;
+  padding-top:3px ;
+  padding-bottom: 3px;
 }
 
 .search-alert{

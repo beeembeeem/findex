@@ -1,6 +1,7 @@
 import React, { Component } from 'react';
 import signupSetting from "../settings/signup"
 import { Auth } from 'aws-amplify';
+import Navbar from "../components/navbar.component";
 
 global.fetch('node-fetch')
 
@@ -97,16 +98,19 @@ export default class signup extends Component {
     if (verified) {
         return (
             <div>
-                <form onSubmit={ this.handleSubmit }>
-                    <label>Confirmation Code</label>
-                    <input name = 'confirmationCode' id='confirmationCode' type='text' onChange={ this.handleConfirmChange }/>
-                    <button>Confirm Sign up</button>
-                </form>
+                              <Navbar data={this.props.data} ></Navbar>
+              <div className='container'>
+              <div className ="login-box w-50 mx-auto my-4 bg-light p-5">                   
+                    <h4>Check your mailbox to confirm your account</h4>
+                    <a href="/signin">Take me to Sign in</a>
             </div>
+            </div>            </div>
+
         );
     } else {
       return (
         <div>
+                          <Navbar data={this.props.data} ></Navbar>
               <div className='container'>
               <div className ="login-box w-50 mx-auto my-4 bg-light p-5">
         <form onSubmit={this.handleSubmit} >

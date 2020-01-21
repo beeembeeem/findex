@@ -50,15 +50,13 @@ class Index extends Component {
       );
     } else {
       return (
-        <div className="main">
-          <Navbar data={this.props.data} ></Navbar>
 
-          <div class="overflow-auto test2">
-            This is an example of using <code>.overflow-auto</code> on an
-            element with set width and height dimensions. By design, this
-            content will vertically scroll.
-          </div>
-        </div>
+        <div className="wrap">
+          <Navbar data={this.props.data} ></Navbar>
+          <div className="container-fluid main">
+
+        </div>        </div>
+
       );
     }
   }
