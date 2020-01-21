@@ -73,8 +73,10 @@ class App extends React.Component {
               path="/signin"
               render={(...props) => <Signin data={authProps} />}
             />
-            <Route component={notFound} />
-          </Switch>
+            <Route
+              path="/"
+              render={(...props) => <Index data={authProps} />}
+            />          </Switch>
         </Router>
       )
     );
