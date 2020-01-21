@@ -111,6 +111,9 @@ body a, body a:hover{
   left: 0;
   right: 0;
 }
+.mainbg{
+  background-color: var(--main-color);;
+}
 .sidebar::before{
   background-image: url("./bg.jpg");
   background-repeat: no-repeat;

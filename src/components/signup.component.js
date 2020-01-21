@@ -99,8 +99,8 @@ export default class signup extends Component {
         return (
             <div>
                               <Navbar data={this.props.data} ></Navbar>
-              <div className='container'>
-              <div className ="login-box  mx-auto my-4 text-light  p-3">                   
+              <div className='container '>
+              <div className ="login-box  mx-auto my-4 text-light mainbg rounded p-3">                   
                     <h4>Check your mailbox to confirm your account</h4>
                     <a href="/signin">Take me to Sign in</a>
             </div>
@@ -111,8 +111,8 @@ export default class signup extends Component {
       return (
         <div>
                           <Navbar data={this.props.data} ></Navbar>
-              <div className='container'>
-              <div className ="login-box  mx-auto my-4 text-light  p-3">
+              <div className='container pb-4 '>
+              <div className ="login-box  mx-auto my-4 text-light mainbg rounded p-5">
         <form onSubmit={this.handleSubmit} >
         {signupSetting.fields.map(item =>
                   <div key = {item.id} className="form-group">
@@ -120,7 +120,7 @@ export default class signup extends Component {
                   <input name =  {item.name} type= {item.type} className="form-control" id= {item.id} placeholder= {item.placeholder} value={this.state.value} onChange={this.handleSignUpChange} ></input>
                 </div>
               )}
-        <button type="submit" className="btn btn-primary" value="Submit">Submit</button>
+        <button type="submit" className="btn btn-info" value="Submit">Submit</button>
         </form></div></div>        </div>
       );
     }

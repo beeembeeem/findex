@@ -54,7 +54,7 @@ export default class signin extends Component {
         
         <div className="wrap">
                   <Navbar data={this.props.data} ></Navbar>
-          <div className="login-box mx-auto my-4 text-light p-5">
+          <div className="login-box mx-auto my-4 text-light mainbg rounded p-5">
             <form>
               {loginSetting.fields.map(item => (
                 <div key={item.id} className="form-group">
