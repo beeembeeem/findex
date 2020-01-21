@@ -136,7 +136,7 @@ class EQU extends Component {
                         {this.state.stockProfile.price} USD{" "}
                       </div>
                       <div className="col-12 smallerText">
-                        {this.state.stockProfile.changes} -{" "}
+                        {this.state.stockProfile.changes} 
                         {this.state.stockProfile.changesPercentage}{" "}
                       </div>
                     </div>
@@ -144,7 +144,7 @@ class EQU extends Component {
                 </div>
               </div>
 
-              <div className="col-12 pt-1 text-white">
+              <div className="col-12 pt-1 text-white smallerText">
                 <div className="row text-center">
                   <div className="col-6">
                     <div className="col-12 row py-2">
@@ -192,10 +192,10 @@ class EQU extends Component {
                     </div>
                   </div>
                   <div className="col-12 py-3 text-center">
-                  <a href={`https://google.com/search?q=${this.state.stockSymbol}`}></a>
+                  <a href={`https://google.com/search?q=${this.state.stockSymbol}`}>
                     <button type="button" class="btn btn-outline-info" >
                       Search Google for {this.state.stockSymbol}
-                    </button>
+                    </button></a>
                   </div>
                 </div>
               </div>
