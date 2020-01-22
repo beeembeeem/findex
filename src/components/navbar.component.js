@@ -42,7 +42,7 @@ export default class Navbar extends Component {
     }
     console.log(this.props);
     return (
-      <nav className="navbar row py-0  ">
+      <nav className={this.props.data.isAuthenticated?"navbar row mx-0 py-0 mainbg":"navbar row mx-0 py-0  "}>
         {/* Handle Mobile Bar */}
         <div className="row fixed-bottom mobile-bar  p-2 text-center d-lg-none">
           {" "}
@@ -58,11 +58,11 @@ export default class Navbar extends Component {
           </div>
         </div>
         {/* Logo Section */}
-        <div className="text-center navbar-brand-wrapper col-2 text-light col-md-4 col-lg-2 align-items-center justify-content-center ">
-          INVX
+        <div className="text-center  navbar-brand-wrapper px-0 col-2 text-light col-md-4 col-lg-2 align-items-center justify-content-center ">
+          {navbarSettings.brand_name}
         </div>
         {/* Top Bar section */}
-        <div className="navbar-menu-wrapper px-0  row col-10 col-md-8 col-lg-10 align-items-center justify-content-end">
+        <div className="navbar-menu-wrapper px-0 mx-0 row col-10 col-md-8 col-lg-10 align-items-center justify-content-end">
           {/* If logged in, show the sidebar button */}
           {this.props.data.isAuthenticated ? (
             <button
@@ -79,14 +79,14 @@ export default class Navbar extends Component {
             ""
           )}
 
-          <div className="col-12 col-lg-7 pr-lg-0">
+          <div className="col-12 col-lg-7 pr-0">
             <Search />
           </div>
           <div
-            class=" pl-lg-0 justify-content-center d-none d-lg-flex col-lg-4"
+            class={this.props.data.isAuthenticated?(" pl-lg-0 justify-content-center d-none d-lg-flex col-lg-4"):" pl-lg-0 justify-content-center d-none d-lg-flex col-lg-5"}
           >
             {this.navbar.map(each => (
-                  <div className="col  d-inline" key={each.id}>
+                  <div className="col text-center d-inline" key={each.id}>
                     <a href={each.url} class="text-nowrap">{each.name}</a>
                   </div>
                 ))

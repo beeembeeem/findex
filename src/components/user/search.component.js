@@ -134,7 +134,7 @@ this.props.history.push({
   render() {
     console.log(this.state);
     return (
-        <div className="col-12 pl-0">
+        <div className="col-12 px-0">
           <input
             className="form-control col-12  d-inline form-control-dark"
             type="text"

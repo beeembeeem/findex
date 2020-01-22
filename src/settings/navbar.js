@@ -1,5 +1,5 @@
 const navbarSettings = {
-    brand_name : 'ForexFolio',
+    brand_name : 'findex.ai',
     buttons_unauth: [
         {   id: 1,
             name: 'Login' ,

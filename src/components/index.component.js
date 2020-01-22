@@ -14,7 +14,7 @@ class Index extends Component {
     console.log("Index constructor // State after assignment : ");
     this.state = {
       portfolioList: [],
-      slimSide:false
+      slimSide: false
     };
   }
   wait = ms => {
@@ -25,38 +25,47 @@ class Index extends Component {
     }
   };
 
-  triggerSide = () =>{
+  triggerSide = () => {
     this.setState({
-      slimSide:!this.state.slimSide
-    })
-  }
+      slimSide: !this.state.slimSide
+    });
+  };
   render() {
     console.log(this.props);
     const triggerObject = {
-      slimSide:this.state.slimSide,
-      triggerSide : this.triggerSide
-    }
+      slimSide: this.state.slimSide,
+      triggerSide: this.triggerSide
+    };
     if (this.props.data.isAuthenticated) {
       return (
         <div className=" wrap ">
-          <Navbar data={this.props.data} trigger = {triggerObject}></Navbar>
+          <Navbar data={this.props.data} trigger={triggerObject}></Navbar>
 
           <div className="container-fluid main">
             {" "}
-            {this.state.slimSide?"": <Sidebar data={this.props.data}/>}
-            <Portfolio data={this.props.data} trigger = {triggerObject} />
+            {this.state.slimSide ? "" : <Sidebar data={this.props.data} />}
+            <Portfolio data={this.props.data} trigger={triggerObject} />
           </div>
         </div>
       );
     } else {
       return (
-
         <div className="wrap">
-          <Navbar data={this.props.data} ></Navbar>
+          <Navbar data={this.props.data}></Navbar>
           <div className="container-fluid main ">
-
-        </div>        </div>
-
+            <div className="overlay-phone  mx-0">
+            <div className="row">
+              <div className="col-12 text-white ">
+                <h1 class="display-4 px-5 pt-3 pt-lg-5">Upcoming AI Powered Financial Index</h1>
+              </div>
+              <div className="col-12 pt-lg-5 row mx-0 text-white">
+                 <div className="col-6 stayTuned ml-auto">
+                Sign up today and stay tuned for our official launch
+                 </div>
+              </div>
+            </div></div>
+          </div>
+        </div>
       );
     }
   }
