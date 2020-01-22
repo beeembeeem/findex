@@ -7,13 +7,23 @@
 
 .portfolio-bg{
   background-color: var(--secondary-color);
-
+scrollbar-width: none; /* Firefox */
+-ms-overflow-style: none;  /* Internet Explorer 10+ */
+}
+.portfolio-bg::-webkit-scrollbar { 
+  display: none; /* Chrome Safari */
+}
+.wrap::-webkit-scrollbar { 
+  display: none; /* Chrome Safari */
 }
 .mobile-bar{
   z-index: 9999;
   -webkit-transition: all 0.5s ease-in-out; /* For Safari 3.1 to 6.0 */
   transition: all 0.5s ease-in-out;
   background-color: var(--main-color);
+}
+.mobile-bar .col a {
+  padding: 5px 0 5px 0;
 }
 body, html{
     width: 100%;
@@ -47,6 +57,7 @@ button:not(:disabled), [type="button"]:not(:disabled), [type="reset"]:not(:disab
   max-height: 220px;
   -webkit-overflow-scrolling: touch;
 }
+
 .search-list::-webkit-scrollbar { 
   display: none; /* Chrome Safari */
 }
@@ -374,6 +385,7 @@ body a, body a:hover{
     overflow-y: scroll;
     overflow-x: hidden;
     -webkit-overflow-scrolling: touch; 
+    
   }
   
 }
@@ -388,6 +400,18 @@ body a, body a:hover{
 
   
 }
+.top-left-alert{
+  position: absolute;
+  top: 0;
+  left: 0;
+  padding: 1rem;
+  padding-top: 5%;
+  z-index: 1000;
+  word-wrap: break-word;
+}
+.top-left-alert-inner{
+  max-width: 300px;
+}
 .wrap{
   width: 100%;
   height: 100%;
@@ -399,7 +423,9 @@ body a, body a:hover{
   overflow-x: hidden;
   -webkit-overflow-scrolling: touch;
 
-  
+  scrollbar-width: none; /* Firefox */
+-ms-overflow-style: none;  /* Internet Explorer 10+ */
+
  }
 .addPortfolioModal{
   position: fixed;

@@ -2,6 +2,8 @@ import React, { Component } from "react";
 import Navbar from "../components/navbar.component";
 import loginSetting from "../settings/login";
 import { Auth } from "aws-amplify";
+import TopLeftAlert from "./alert/topleftalert.component";
+
 global.fetch("node-fetch");
 
 export default class signin extends Component {
@@ -20,8 +22,6 @@ export default class signin extends Component {
     event.preventDefault();
 
     // Form validation
-
-    // AWS Cognito integration here
     console.log(this.state);
     this.setState({
       signing: true
@@ -35,6 +35,11 @@ export default class signin extends Component {
       });
       window.location.href = "/";
     } catch (error) {
+      this.setState({
+        failed : true,
+        failedMessage : error.message,
+        signing:false
+      })
       console.log(error);
     }
   };
@@ -42,18 +47,26 @@ export default class signin extends Component {
     if (this.props.data.isAuthenticated) {
       return (window.location.href = "/");
     } else if (this.state.signing) {
-      return ( 
-        <div className="row loading">
-      <div className="text-center text-light  col-12">
-      <img src ={require('./user/img/loading.svg')} className = ""alt=""/>
-  </div>
-      </div>
-      )
+      return (
+        <div className="">
+          {" "}
+          <Navbar data={this.props.data}></Navbar>
+          <div className="row loading">
+            <div className="text-center text-light  col-12">
+              <img
+                src={require("./user/img/loading.svg")}
+                className=""
+                alt=""
+              />
+            </div>
+          </div>{" "}
+        </div>
+      );
     } else {
       return (
-        
         <div className="wrap">
-                  <Navbar data={this.props.data} ></Navbar>
+                  {this.state.failed?<TopLeftAlert alert={{ text: this.state.failedMessage }} />:""}
+          <Navbar data={this.props.data}></Navbar>
           <div className="login-box mx-auto my-4 text-light mainbg rounded p-5">
             <form>
               {loginSetting.fields.map(item => (
@@ -70,7 +83,11 @@ export default class signin extends Component {
                   ></input>
                 </div>
               ))}
-              <button type="submit" className="btn btn-info"  onClick={this.handleSubmit}>
+              <button
+                type="submit"
+                className="btn btn-info"
+                onClick={this.handleSubmit}
+              >
                 Submit
               </button>
             </form>

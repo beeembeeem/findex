@@ -4,7 +4,9 @@ import AddPortfolio from "./addPortfolio.component";
 import DeletePortfolio from "./deletePortfolio.component";
 import * as subscriptions from "../../graphql/subscriptions";
 import { DashboardPortfolios } from "./functions/custom_queries";
-import StockListDisplay from "./stockListDisplay.component"
+import StockListDisplay from "./stockListDisplay.component";
+import TopLeftAlert from "../alert/topleftalert.component";
+
 class Portfolio extends Component {
   constructor(props) {
     super(props);
@@ -13,7 +15,7 @@ class Portfolio extends Component {
       redirectToAddPortfolio: false,
       redirectToDeletePortfolio: false,
       portfolioToDelete: undefined,
-      fetching:true
+      fetching: true
     };
     this.getgraph();
   }
@@ -49,15 +51,20 @@ class Portfolio extends Component {
   getgraph = async () => {
     if (this.props.data.isAuthenticated) {
       try {
-              const result = await API.graphql(graphqlOperation(DashboardPortfolios));
-      console.log(result);
-      this.setState({
-        portfolioList: result.data.listPortfolios.items,
-        fetching : false
-      });
-
+        const result = await API.graphql(graphqlOperation(DashboardPortfolios));
+        console.log(result);
+        this.setState({
+          portfolioList: result.data.listPortfolios.items,
+          fetching: false,
+          failed:false,
+          failedMessage:""
+        });
       } catch (error) {
-        console.log(error)
+        this.setState({
+          failed:true,
+          failedMessage:error.message
+        })
+        console.log(error);
       }
     }
   };
@@ -84,7 +91,18 @@ class Portfolio extends Component {
     if (this.props.data.isAuthenticated) {
       console.log(this.state);
       return (
-        <div className={this.props.trigger.slimSide? " portfolio-bg col-12 col-lg-12 order-2 order-md-1" : " portfolio-bg col-12 col-lg-10 order-2 order-md-1"}>
+        <div
+          className={
+            this.props.trigger.slimSide
+              ? " portfolio-bg col-12 col-lg-12 order-2 order-md-1"
+              : " portfolio-bg col-12 col-lg-10 order-2 order-md-1"
+          }
+        >
+          {this.state.failed ? (
+            <TopLeftAlert alert={{ text: this.state.failedMessage }} />
+          ) : (
+            ""
+          )}
           {this.state.redirectToAddPortfolio && (
             <AddPortfolio
               data={this.props.data}
@@ -100,7 +118,7 @@ class Portfolio extends Component {
               }}
             />
           )}
-          <div className="text-dark p-3 portfolio-bg rounded">
+          <div className="text-dark p-3  rounded">
             <div className="addButton text-center  rounded">
               <button
                 className=" btn-outline-light btn-sm  btn h3 m-0 "
@@ -116,14 +134,13 @@ class Portfolio extends Component {
             <h5 className="text-light ">Portfolios</h5>
             <div className="row p-2">
               {this.state.fetching ? (
-                <div className="container text-center text-light portfolio-loader">
-                </div>
-              ) : this.state.portfolioList.length === 0 ?
-              <div className="container text-center text-light ">
+                <div className="container text-center text-light portfolio-loader"></div>
+              ) : this.state.portfolioList.length === 0 ? (
+                <div className="container text-center text-light ">
                   {" "}
                   <h4>Start by creating a new portfolio</h4>
                 </div>
-               :(
+              ) : (
                 this.state.portfolioList.map(item => (
                   <div key={item.id} className="col-12 col-md-6 py-2">
                     <div className="card portfolio">
@@ -141,16 +158,20 @@ class Portfolio extends Component {
                         <h6 className="card-header-title"> {item.name}</h6>
                       </div>
                       <div className="card-body">
-                        {item.stocks.items.length == 0 || JSON.parse(item.stocks.items[0].symbol).length == 0? (
+                        {item.stocks.items.length == 0 ||
+                        JSON.parse(item.stocks.items[0].symbol).length == 0 ? (
                           <div className="noEQ">
                             This portfolio has no equities
                           </div>
                         ) : (
-                              <StockListDisplay searchStockList = {{
-                                selectedStockList : JSON.parse(item.stocks.items[0].symbol)
-                              }}/>
+                          <StockListDisplay
+                            searchStockList={{
+                              selectedStockList: JSON.parse(
+                                item.stocks.items[0].symbol
+                              )
+                            }}
+                          />
                         )}
-
                       </div>
                     </div>
                   </div>

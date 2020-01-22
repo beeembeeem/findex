@@ -2,6 +2,7 @@ import React, { Component } from 'react';
 import signupSetting from "../settings/signup"
 import { Auth } from 'aws-amplify';
 import Navbar from "../components/navbar.component";
+import TopLeftAlert from "./alert/topleftalert.component";
 
 global.fetch('node-fetch')
 
@@ -10,11 +11,11 @@ export default class signup extends Component {
       super(props);
 
       this.state = {
-          username: '',
-          password: '',
-          family_name: '',
-          name: '',
-          email: '',
+          username: undefined,
+          password: undefined,
+          family_name: undefined,
+          name: undefined,
+          email: undefined,
           confirmationCode: '',
           verified: false,
           fields :  signupSetting.fields
@@ -24,7 +25,7 @@ export default class signup extends Component {
       this.confirmSignUp = this.confirmSignUp.bind(this);
   }
 
-  signUp() {
+  signUp(e) {
       const { username, password, email, name,family_name } = this.state;  
       Auth.signUp({
           username: username,
@@ -37,14 +38,24 @@ export default class signup extends Component {
       })
       .then(() => {
           console.log('Successfully signed up');
+          console.log(this.state)
           this.setState({
             password: '',
             email: '',
             phone_number: '',
-            verified: true
+            verified: true,
+            failed:false,
+            failedMessage:""
         });
+              e.target.reset();
       })
-      .catch((err) => console.log(`Error signing up: ${ JSON.stringify(err) }`))
+      .catch((err) => {
+        console.log(err)
+        this.setState({
+          failed:true,
+          failedMessage:err.message
+        })
+      })
   }
 
   confirmSignUp() {
@@ -72,10 +83,8 @@ export default class signup extends Component {
         this.confirmSignUp();
 
       } else {
-        this.signUp();
-        
+        this.signUp(e);
       }
-      e.target.reset();
   }
 
   handleConfirmChange = (event) =>{
@@ -110,6 +119,11 @@ export default class signup extends Component {
     } else {
       return (
         <div>
+                  {this.state.failed ? (
+            <TopLeftAlert alert={{ text: this.state.failedMessage }} />
+          ) : (
+            ""
+          )}
                           <Navbar data={this.props.data} ></Navbar>
               <div className='container pb-4 '>
               <div className ="login-box  mx-auto my-4 text-light mainbg rounded p-5">
