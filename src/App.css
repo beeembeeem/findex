@@ -15,6 +15,15 @@
 .Gscroll::-webkit-scrollbar { 
   display: none; /* Chrome Safari */
 }
+@font-face {
+  font-family: 'Telephasic BRK';
+  src: url('TelephasicBRK.woff2') format('woff2'),
+      url('TelephasicBRK.woff') format('woff');
+  font-weight: normal;
+  font-style: normal;
+}
+
+
 .portfolio-bg{
   
   background-color: var(--secondary-color);
@@ -112,6 +121,11 @@ body a, body a:hover{
   -webkit-transition: width 0.25s ease, background 0.25s ease;
   -moz-transition: width 0.25s ease, background 0.25s ease;
   -ms-transition: width 0.25s ease, background 0.25s ease;
+  font-family: "Telephasic BRK";
+}
+.navbar-brand-wrapper a{
+  font-style: normal;
+  text-decoration: none;
 }
 .navbar .navbar-menu-wrapper {
   transition: width 0.25s ease;
@@ -373,6 +387,9 @@ body a, body a:hover{
 @media only screen and (min-width: 992px) {
   .col-12 .main-heading{
     font-size: 3.2rem;
+  }
+  .navbar-brand-wrapper{
+    font-size: 1.5em;
   }
   .stayTuned{
     font-size: 1.4em;

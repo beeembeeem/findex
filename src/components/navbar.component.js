@@ -59,7 +59,7 @@ export default class Navbar extends Component {
         </div>
         {/* Logo Section */}
         <div className="text-center  navbar-brand-wrapper px-0 col-2 text-light col-md-4 col-lg-2 align-items-center justify-content-center ">
-          {navbarSettings.brand_name}
+  <a href="/">{navbarSettings.brand_name}</a>
         </div>
         {/* Top Bar section */}
         <div className="navbar-menu-wrapper px-0 mx-0 row col-10 col-md-8 col-lg-10 align-items-center justify-content-end">

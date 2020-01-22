@@ -1,5 +1,5 @@
 const navbarSettings = {
-    brand_name : 'findex.ai',
+    brand_name : 'VESTOR',
     buttons_unauth: [
         {   id: 1,
             name: 'Login' ,
