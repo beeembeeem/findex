@@ -44,10 +44,10 @@ export default class Navbar extends Component {
     return (
       <nav className={this.props.data.isAuthenticated?"navbar row mx-0 py-0 mainbg":"navbar row mx-0 py-0  "}>
         {/* Handle Mobile Bar */}
-        <div className="row fixed-bottom mobile-bar  p-2 text-center d-lg-none">
+        <div className="row fixed-bottom mobile-bar   text-center d-lg-none">
           {" "}
           <div className="col d-flex justify-content-around p-0">
-              { this.navbar.map(each => (
+              { this.props.data.isAuthenticated && this.navbar.map(each => (
                   <a href={each.url}>
                     <button type="button" class="btn btn-outline-info btn-sm">
                       {each.name}
@@ -85,7 +85,7 @@ export default class Navbar extends Component {
           <div
             class={this.props.data.isAuthenticated?(" pl-lg-0 justify-content-center d-none d-lg-flex col-lg-4"):" pl-lg-0 justify-content-center d-none d-lg-flex col-lg-5"}
           >
-            {this.navbar.map(each => (
+            { this.navbar.map(each => (
                   <div className="col text-center d-inline" key={each.id}>
                     <a href={each.url} class="text-nowrap">{each.name}</a>
                   </div>

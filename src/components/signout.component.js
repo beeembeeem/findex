@@ -24,9 +24,11 @@ class signout extends Component {
         user: null,
         isAuthenticated: false
       });
+      window.location.href = "/"
     } catch (error) {
       console.log("error");
       console.log(error.message);
+            window.location.href = "/"
     }
   };
   render() {

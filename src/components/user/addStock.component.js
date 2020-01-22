@@ -25,17 +25,7 @@ class notFound extends Component {
     var first = true;
     var second = false;
     for (let i = 0; i < currentSearchList.length; i++) {
-      if (first) {
-        if (i > 5) {
-          first = false;
-        }
-      } else if (!second) {
-        this.setState({
-          searchStockList: currentSearchList,
-          loadingSearch: true
-        });
-        second = true;
-      }
+
       var data = {};
       var currentStock = currentSearchList[i];
       try {
@@ -87,7 +77,7 @@ class notFound extends Component {
           fuzziness:"AUTO"
         }
       },
-      size: 100
+      size: 20
     };
 
     try {
@@ -103,6 +93,10 @@ class notFound extends Component {
         }
       );
       const json = await result.json();
+          this.setState({
+      searchStockList: json.hits.hits,
+      loadingSearch: true
+    });
       this.getSearchChanges(json.hits.hits);
     } catch (error) {
       console.log(error);
