@@ -14,7 +14,9 @@ class signout extends Component {
 
   handleLogOut = async event => {
     try {
-      Auth.currentAuthenticatedUser().then(user => user.signOut());
+      var user = await Auth.currentAuthenticatedUser();
+      var result = await user.signOut()
+      console.log(result)
       this.setState({
         signedout: true
       });
@@ -22,7 +24,6 @@ class signout extends Component {
         user: null,
         isAuthenticated: false
       });
-      window.location.href = "/";
     } catch (error) {
       console.log("error");
       console.log(error.message);
@@ -33,7 +34,7 @@ class signout extends Component {
       return (
         <div className="container">
           {" "}
-          <h1 className="pt-3 text-light">Redirecting...</h1>
+          <h1 className="pt-3 text-light">You are succesfuly signed out.</h1>
         </div>
       );
     }
