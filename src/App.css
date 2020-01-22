@@ -5,7 +5,18 @@
   --main-padding: 15px;
 }
 
+.Gscroll{
+  scrollbar-width: none; /* Firefox */
+  -ms-overflow-style: none;  /* Internet Explorer 10+ */
+  overflow-x: none;
+  overflow-y: scroll;
+  -webkit-overflow-scrolling: touch;
+}
+.Gscroll::-webkit-scrollbar { 
+  display: none; /* Chrome Safari */
+}
 .portfolio-bg{
+  
   background-color: var(--secondary-color);
 scrollbar-width: none; /* Firefox */
 -ms-overflow-style: none;  /* Internet Explorer 10+ */
@@ -51,7 +62,6 @@ button:not(:disabled), [type="button"]:not(:disabled), [type="reset"]:not(:disab
 .search-list{
   overflow-y: scroll;
   overflow-x: hidden;
-  -webkit-overflow-scrolling: touch;
   scrollbar-width: none; /* Firefox */
   -ms-overflow-style: none;  /* Internet Explorer 10+ */
   max-height: 220px;
