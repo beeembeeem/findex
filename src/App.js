@@ -74,6 +74,7 @@ class App extends React.Component {
               render={(...props) => <Signin data={authProps} />}
             />
             <Route
+              exact
               path="/"
               render={(...props) => <Index data={authProps} />}
             />          </Switch>
