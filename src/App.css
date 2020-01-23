@@ -123,6 +123,9 @@ body a, body a:hover{
   -ms-transition: width 0.25s ease, background 0.25s ease;
   font-family: "Telephasic BRK";
 }
+.bg-green{
+background-color: rgb(0, 151, 81);
+color: white;}
 .navbar-brand-wrapper a{
   font-style: normal;
   text-decoration: none;

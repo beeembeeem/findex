@@ -26,7 +26,8 @@ class EQU extends Component {
     this.state = {
       stockSymbol: stockSymbol,
       stockProfile: stockProfile,
-      loading: loading
+      loading: loading,
+      failed:false
     };
   }
   componentDidMount() {
@@ -52,14 +53,21 @@ class EQU extends Component {
         stockSymbol: stockSymbol,
         stockProfile: stockProfile
       });
-    } else if (!this.state.stockProfile) {
+    } else if (!this.state.stockProfile && !this.state.failed) {
       var data = await this.fetchProfile(stockSymbol);
       var stockProfile = data.profile;
+      console.log(data)
+      if(!data.profile){
+        this.setState({
+          failed:true
+        })
+      } else {
       this.setState({
         stockSymbol: stockSymbol,
         stockProfile: stockProfile
-      });
+      });}
     } else {
+     
     }
   }
   fetchProfile = async stockSymbol => {
@@ -71,6 +79,7 @@ class EQU extends Component {
       return data;
     } catch (error) {
       console.log(error);
+
     }
   };
   add = async () => {
@@ -120,9 +129,19 @@ class EQU extends Component {
       <div className="wrap">
         <Navbar data={this.props.data}></Navbar>
         <div className="container mt-md-3 mt-lg-4  bg-dark p-3 pb-5">
-          {!this.state.stockProfile ? (
+          {!this.state.stockProfile && !this.state.failed ? 
             <div className="data-loader"> </div>
-          ) : (
+            
+           : this.state.failed ? 
+                    <div className="container text-center text-light">
+                    <h3>Oops</h3>
+                    <h6>Sorry, It seems like we dont currently host any data on this security.</h6>
+                    <a href={`https://google.com/search?q=${this.state.stockSymbol}`} target="_blank">
+                    <button type="button" class="btn btn-outline-info" >
+                      Search Google for {this.state.stockSymbol}
+                    </button></a>
+                    </div>         
+           :(
             <div className="row">
               <div className="col-12  text-white">
                 <div className="row">

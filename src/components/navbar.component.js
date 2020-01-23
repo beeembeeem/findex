@@ -42,7 +42,7 @@ export default class Navbar extends Component {
     }
     console.log(this.props);
     return (
-      <nav className={this.props.data.isAuthenticated?"navbar row mx-0 py-0 mainbg":"navbar row mx-0 py-0  "}>
+      <nav className={this.props.data.isAuthenticated?"navbar row mx-0 py-0 ":"navbar row mx-0 py-0  "}>
         {/* Handle Mobile Bar */}
         <div className="row fixed-bottom mobile-bar   text-center d-lg-none">
           {" "}

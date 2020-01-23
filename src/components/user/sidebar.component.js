@@ -27,14 +27,14 @@ class sidebar extends Component {
         <div className="sidebar col-2 d-lg-block d-none " data-active-color="rose" data-background-color="black" data-image="#">
             <div className="logo text-center ">
 
-        <a href="#" className="simple-text text-light logo-normal">
-             {navbarSettings.brand_name} 
-        </a>
+        <button onClick={this.infoNotice} className=" text-light btn btn-info btn-lg logo-normal">
+             {"Help"} 
+        </button>
     </div>
     <div className="sidebar-user">
     <div className="user">
             <div className="info">
-                <a data-toggle="collapse" href="#collapseExample" className="collapsed" aria-expanded="false">
+                <a data-toggle="collapse" href="#" className="collapsed" aria-expanded="false">
                     <p className="text-center text-light m-0 p-0">
                          {this.props.data.user.username} 
                     </p>

@@ -304,7 +304,7 @@ class notFound extends Component {
                           item.data &&
                           item.data.profile &&
                           item.data.profile.changes > 0
-                            ? "badge searchListItem badge-success badge-pill valid-data-high"
+                            ? "badge searchListItem bg-green badge-pill valid-data-high"
                             : item.data &&
                               item.data.profile &&
                               item.data.profile.changes < 0

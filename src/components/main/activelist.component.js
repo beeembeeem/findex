@@ -30,7 +30,7 @@ export default class dumper extends Component {
     return (
       <div className="row mx-0 mainbg px-4 py-4 rounded">
         <div className="col-12 mx-0">
-          <h5>Today's Most Active Performers</h5>
+          <h5>Today's Most Active</h5>
         </div>
         {this.state.activeList &&
           this.state.activeList.map(item => (
@@ -39,7 +39,7 @@ export default class dumper extends Component {
                 <div
                   className={
                     item.changes > 0
-                      ? "card text-white bg-success "
+                      ? "card text-white bg-green "
                       : item.changes < 0
                       ? "card text-white bg-danger "
                       : "card text-white bg-secondary "
@@ -75,7 +75,7 @@ export default class dumper extends Component {
           {/* Gainer Dump */}
 
           <div className="col-12 mx-0">
-          <h5>Today's Most Gainer Performers</h5>
+          <h5>Today's Most Gainers </h5>
         </div>
         {this.state.activeList &&
           this.state.gainerList.map(item => (
@@ -84,7 +84,7 @@ export default class dumper extends Component {
                 <div
                   className={
                     item.changes > 0
-                      ? "card text-white bg-success "
+                      ? "card text-white bg-green "
                       : item.changes < 0
                       ? "card text-white bg-danger "
                       : "card text-white bg-secondary "
