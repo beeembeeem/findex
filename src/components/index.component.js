@@ -71,7 +71,7 @@ class Index extends Component {
               <div className="row">
                 <div className="col-12 text-white ">
                   <h1 class="display-4 main-heading px-5 pt-3 pt-lg-5">
-                    Upcoming AI Powered Financial Index
+                    Upcoming AI Powered Financial Platform
                   </h1>
                 </div>
                 <div className="col-12 pt-lg-5 row mx-0 text-white">
