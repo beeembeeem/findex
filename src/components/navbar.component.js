@@ -58,11 +58,11 @@ export default class Navbar extends Component {
           </div>
         </div>
         {/* Logo Section */}
-        <div className="text-center  navbar-brand-wrapper px-0 col-2 text-light col-md-4 col-lg-2 align-items-center justify-content-center ">
+        <div className="text-center  navbar-brand-wrapper px-0 col-3 col-sm-2 text-light col-md-4 col-lg-2 align-items-center justify-content-center ">
   <a href="/">{navbarSettings.brand_name}</a>
         </div>
         {/* Top Bar section */}
-        <div className="navbar-menu-wrapper px-0 mx-0 row col-10 col-md-8 col-lg-10 align-items-center justify-content-end">
+        <div className="navbar-menu-wrapper px-0 mx-0 row col-9 col-sm-10 col-md-8 col-lg-10 align-items-center justify-content-end">
           {/* If logged in, show the sidebar button */}
           {this.props.data.isAuthenticated ? (
             <button
