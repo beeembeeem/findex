@@ -11,7 +11,7 @@ class signout extends Component {
   componentDidMount() {
     this.handleLogOut();
   }
-
+// Log out Amplfiy Client
   handleLogOut = async event => {
     try {
       var user = await Auth.currentAuthenticatedUser();

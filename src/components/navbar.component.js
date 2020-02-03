@@ -13,6 +13,7 @@ export default class Navbar extends Component {
       showMobileBar: false
     };
   }
+// Hanlder function for toggle button
 
   handleToggle = () => {
     this.setState({
@@ -20,6 +21,7 @@ export default class Navbar extends Component {
     });
   };
   componentDidMount() {}
+  // Hanlder function for side bar
   handleSideBar = e => {
     e.preventDefault();
     const mobile = window.innerWidth < 992;

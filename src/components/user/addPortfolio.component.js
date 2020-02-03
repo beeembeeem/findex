@@ -23,7 +23,6 @@ class addPortfolio extends Component {
     this.portfolioSettings = portfolioSettings;
   }
   componentDidMount() {
-    console.log(this.props);
   }
   handleChange = event => {
     this.setState({
@@ -48,8 +47,7 @@ class addPortfolio extends Component {
             input: { name: this.state.name, type: this.state.type }
           })
         );
-        console.log("Added Portfolio succesfully");
-        console.log(result);
+        // console.log("Added Portfolio succesfully");
 
         const ID = result.data.createPortfolio.id;
         const stocks = JSON.stringify(this.state.searchStockList);
@@ -65,8 +63,7 @@ class addPortfolio extends Component {
           })
         );
 
-        console.log("Added Stocklist succesfully");
-        console.log(addStockResult);
+        // console.log("Added Stocklist succesfully");
         this.props.work.redirectToAddPortfolio_f();
       } catch (error) {
         console.log(error);
@@ -80,8 +77,6 @@ class addPortfolio extends Component {
     });
   };
   render() {
-    console.log("render");
-    console.log(this.state);
     return (
       <div className="addPortfolioModal">
         <div className="addPortfolioInner card">

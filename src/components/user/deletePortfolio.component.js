@@ -5,24 +5,19 @@ import * as mutations from "../../graphql/mutations"
 class DeletePortfolio extends Component {
   constructor(props) {
     super(props);
-    this.state = {brand: "Ford"};
   }
   componentDidMount() {
-    this.setState({comment: 'Hello'});
   }
 
   deletePortfolio = async(e) =>{
     e.preventDefault()
         if(this.props.data.isAuthenticated){
           const result = await API.graphql(graphqlOperation(mutations.deletePortfolio,{input:{id:this.props.work.portfolioToDelete.id}}))
-            console.log("Deleted Portfolio succesfully")
-            console.log(result)
+            // console.log("Deleted Portfolio succesfully")
             this.props.work.redirectToDeletePortfolio_f()
           }
         }
   render() {
-    console.log('render delete')
-    console.log(this.props)
     return (
     <div className="addPortfolioModal"> 
     <div className="addPortfolioInner card">

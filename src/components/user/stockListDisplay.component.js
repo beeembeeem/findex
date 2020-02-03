@@ -4,7 +4,7 @@ import { Auth, API, graphqlOperation } from "aws-amplify";
 class stockListDisplay extends Component {
   constructor(props) {
     super(props);
-    console.log(this.props.searchStockList.selectedStockList)
+    // console.log(this.props.searchStockList.selectedStockList)
     this.state = {selectedStockList: this.props.searchStockList.selectedStockList};
   }
 
@@ -29,8 +29,8 @@ class stockListDisplay extends Component {
         `https://financialmodelingprep.com/api/v3/company/profile/${currentStock.symbol}`
       );
       data = await data.json();
-      console.log(data);
-      console.log(currentStock);
+      // console.log(data);
+      // console.log(currentStock);
       currentStock.expanded = true;
       currentStock.data = data;
       currentStockList.splice(currentStockIndex, currentStock);
@@ -40,7 +40,7 @@ class stockListDisplay extends Component {
     });
   };
   expandAllStockData = async () => {
-    console.log("expanding");
+    // console.log("expanding");
     this.setState({
       expandingAll: true
     });
@@ -53,7 +53,7 @@ class stockListDisplay extends Component {
           `https://financialmodelingprep.com/api/v3/company/profile/${currentStock.symbol}`
         );
         data = await data.json();
-        console.log(data);
+        // console.log(data);
         currentStock.data = data;
       } catch (error) {
         console.log(error);
@@ -61,14 +61,14 @@ class stockListDisplay extends Component {
       currentStock.expanded = true;
       newList.push(currentStock);
     }
-    console.log(newList);
+    // console.log(newList);
     this.setState({
       selectedStockList: newList,
       expandingAll: false
     });
   };
   shrinkAllStockData = () => {
-    console.log("expanding");
+    // console.log("expanding");
     this.setState({
       expandingAll: true
     });
@@ -79,7 +79,7 @@ class stockListDisplay extends Component {
       currentStock.expanded = false;
       newList.push(currentStock);
     }
-    console.log(newList);
+    // console.log(newList);
     this.setState({
       selectedStockList: newList,
       expandingAll: false

@@ -18,10 +18,12 @@ class App extends React.Component {
       user: null
     };
   }
+  //general parent state setter to be passed on
   setSomeState = some => {
     this.setState(some);
   };
 
+  //handle authentication using AWS cognito through Amplify
   async componentDidMount() {
     try {
       const session = await Auth.currentSession();
@@ -39,11 +41,13 @@ class App extends React.Component {
   }
 
   render() {
+    //build the authentication object to pass along
     const authProps = {
       isAuthenticated: this.state.isAuthenticated,
       user: this.state.user,
       setSomeState: this.setSomeState
     };
+
     return (
       !this.state.isAuthenticating && (
         <Router>
@@ -74,10 +78,11 @@ class App extends React.Component {
               render={(...props) => <Signin data={authProps} />}
             />
             <Route
-              exact
+              
               path="/"
               render={(...props) => <Index data={authProps} />}
-            />          </Switch>
+            />{" "}
+          </Switch>
         </Router>
       )
     );

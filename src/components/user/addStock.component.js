@@ -1,6 +1,6 @@
 import React, { Component } from "react";
 import { Auth, API, graphqlOperation } from "aws-amplify";
-
+// Search Modules of this component are similar of those in Search.component
 class notFound extends Component {
   constructor(props) {
     super(props);
@@ -16,16 +16,17 @@ class notFound extends Component {
     this.alertTimeOut = 0;
   }
   componentDidMount() {}
+  // Clear timeout before unmounting
   componentWillUnmount() {
     if (this.alertTimeOut) {
       clearTimeout(this.alertTimeOut);
     }
   }
+  // Get stock information about search results
   getSearchChanges = async currentSearchList => {
     var first = true;
     var second = false;
     for (let i = 0; i < currentSearchList.length; i++) {
-
       var data = {};
       var currentStock = currentSearchList[i];
       try {
@@ -38,9 +39,6 @@ class notFound extends Component {
       } catch (error) {
         console.log(error);
       }
-      console.log(data);
-      console.log(currentStock);
-      console.log(currentSearchList);
     }
 
     this.setState({
@@ -48,7 +46,10 @@ class notFound extends Component {
       loadingSearch: false
     });
   };
+
   search = async () => {
+    // Cache similar items in current searchstocklist
+
     var currentSearchList = this.state.searchStockList;
     var updatedSearchList = [];
     currentSearchList.filter(item => {
@@ -59,6 +60,7 @@ class notFound extends Component {
         updatedSearchList.push(item);
       }
     });
+    // update similar items and prepare the new query
     this.setState({
       searchStockList: updatedSearchList
     });
@@ -74,7 +76,7 @@ class notFound extends Component {
         query_string: {
           fields: fields,
           query: userinput,
-          fuzziness:"AUTO"
+          fuzziness: "AUTO"
         }
       },
       size: 20
@@ -93,10 +95,10 @@ class notFound extends Component {
         }
       );
       const json = await result.json();
-          this.setState({
-      searchStockList: json.hits.hits,
-      loadingSearch: true
-    });
+      this.setState({
+        searchStockList: json.hits.hits,
+        loadingSearch: true
+      });
       this.getSearchChanges(json.hits.hits);
     } catch (error) {
       console.log(error);
@@ -106,7 +108,7 @@ class notFound extends Component {
   searchHandle = event => {
     const len = event.target.value.length;
     if (this.timeout) {
-      console.log("CANCELING TIMEOUT");
+      // console.log("CANCELING TIMEOUT");
       clearTimeout(this.timeout);
     }
     this.setState({
@@ -114,7 +116,7 @@ class notFound extends Component {
     });
     if (len > 0) {
       this.timeout = setTimeout(() => {
-        console.log("TIMEOUT");
+        // console.log("TIMEOUT");
         this.search();
       }, 200);
     }
@@ -122,7 +124,6 @@ class notFound extends Component {
 
   searchClickHandler = (e, sym) => {
     e.preventDefault();
-
     var item = this.state.selectedStockList;
     var duplicate = item.some(each => each["symbol"] === sym);
     if (!duplicate) {
@@ -133,7 +134,7 @@ class notFound extends Component {
         clearTimeout(this.alertTimeOut);
       }
       document.getElementsByClassName("search-alert")[0].style.opacity = 1;
-      this.props.searchStockList.setSearchStockList(item)
+      this.props.searchStockList.setSearchStockList(item);
       this.setState(
         {
           selectedStockList: item,
@@ -216,8 +217,6 @@ class notFound extends Component {
         `https://financialmodelingprep.com/api/v3/company/profile/${currentStock.symbol}`
       );
       data = await data.json();
-      console.log(data);
-      console.log(currentStock);
       currentStock.expanded = true;
       currentStock.data = data;
       currentStockList.splice(currentStockIndex, currentStock);
@@ -227,7 +226,6 @@ class notFound extends Component {
     });
   };
   expandAllStockData = async () => {
-    console.log("expanding");
     this.setState({
       expandingAll: true
     });
@@ -240,7 +238,6 @@ class notFound extends Component {
           `https://financialmodelingprep.com/api/v3/company/profile/${currentStock.symbol}`
         );
         data = await data.json();
-        console.log(data);
         currentStock.data = data;
       } catch (error) {
         console.log(error);
@@ -248,14 +245,12 @@ class notFound extends Component {
       currentStock.expanded = true;
       newList.push(currentStock);
     }
-    console.log(newList);
     this.setState({
       selectedStockList: newList,
       expandingAll: false
     });
   };
   shrinkAllStockData = () => {
-    console.log("expanding");
     this.setState({
       expandingAll: true
     });
@@ -266,14 +261,12 @@ class notFound extends Component {
       currentStock.expanded = false;
       newList.push(currentStock);
     }
-    console.log(newList);
     this.setState({
       selectedStockList: newList,
       expandingAll: false
     });
   };
   render() {
-    console.log(this.state);
     return (
       <form className="card-body col-12 col-lg-6 ">
         <div className="form-group col-12 ">
@@ -335,14 +328,14 @@ class notFound extends Component {
                     </div>
                     {/* Stock Change Display */}
                     <div className="col-6 text-right">
-                        {item.data && item.data.profile ? (
-                          item.data.profile.changes +
-                          item.data.profile.changesPercentage
-                        ) : this.state.loadingSearch ? (
-                          <div className="data-loader-sm"></div>
-                        ) : (
-                          " "
-                        )}
+                      {item.data && item.data.profile ? (
+                        item.data.profile.changes +
+                        item.data.profile.changesPercentage
+                      ) : this.state.loadingSearch ? (
+                        <div className="data-loader-sm"></div>
+                      ) : (
+                        " "
+                      )}
                     </div>
                   </div>
                 </li>

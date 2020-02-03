@@ -13,6 +13,7 @@ export default class signin extends Component {
       signing: false
     };
   }
+  // Hanlder function for input fields
   handleChange = event => {
     this.setState({
       [event.target.name]: event.target.value
@@ -21,14 +22,13 @@ export default class signin extends Component {
   handleSubmit = async event => {
     event.preventDefault();
 
-    // Form validation
-    console.log(this.state);
+    // console.log(this.state);
     this.setState({
       signing: true
     });
     try {
       const user = await Auth.signIn(this.state.Username, this.state.Password);
-      console.log(user);
+      // console.log(user);
       this.props.data.setSomeState({
         user: user,
         isAuthenticated: true
@@ -36,10 +36,10 @@ export default class signin extends Component {
       window.location.href = "/";
     } catch (error) {
       this.setState({
-        failed : true,
-        failedMessage : error.message,
-        signing:false
-      })
+        failed: true,
+        failedMessage: error.message,
+        signing: false
+      });
       console.log(error);
     }
   };
@@ -65,7 +65,11 @@ export default class signin extends Component {
     } else {
       return (
         <div className="wrap">
-                  {this.state.failed?<TopLeftAlert alert={{ text: this.state.failedMessage }} />:""}
+          {this.state.failed ? (
+            <TopLeftAlert alert={{ text: this.state.failedMessage }} />
+          ) : (
+            ""
+          )}
           <Navbar data={this.props.data}></Navbar>
           <div className="login-box mx-auto my-4 text-light mainbg rounded p-5">
             <form>

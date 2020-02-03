@@ -19,40 +19,37 @@ class Portfolio extends Component {
     };
     this.getgraph();
   }
+  // Subscription to watch for deletion of portfolios
   watchDel = async () => {
-    console.log("watch graph deletin onnn mate");
     if (this.props.data.isAuthenticated) {
-      console.log("vv");
       await API.graphql(
         graphqlOperation(subscriptions.onDeletePortfolio, {
           owner: this.props.data.user.username
         })
       ).subscribe(result => {
-        console.log(result);
-        console.log("Delete Sync results ^^");
+        // console.log("Delete Sync results ^^");
         this.getgraph();
       });
     }
   };
+  // Subscriotion to watch for addition of portfolios
   watchAdd = async () => {
-    console.log("watch graph goin onnn mate");
     if (this.props.data.isAuthenticated) {
       await API.graphql(
         graphqlOperation(subscriptions.onCreatePortfolio, {
           owner: this.props.data.user.username
         })
       ).subscribe(result => {
-        console.log(result);
-        console.log("added Sync results ^^");
+        // console.log("added Sync results ^^");
         this.getgraph();
       });
     }
   };
+  // Fetch portfolios and user data with graphql
   getgraph = async () => {
     if (this.props.data.isAuthenticated) {
       try {
         const result = await API.graphql(graphqlOperation(DashboardPortfolios));
-        console.log(result);
         this.setState({
           portfolioList: result.data.listPortfolios.items,
           fetching: false,
@@ -74,7 +71,6 @@ class Portfolio extends Component {
     this.watchAdd();
   }
   componentDidUpdate() {
-    console.log("component did update");
   }
   redirectToAddPortfolio_f = e => {
     this.setState({
@@ -89,7 +85,6 @@ class Portfolio extends Component {
   };
   render() {
     if (this.props.data.isAuthenticated) {
-      console.log(this.state);
       return (
         <div
           className={
@@ -98,6 +93,7 @@ class Portfolio extends Component {
               : " portfolio-bg col-12 col-lg-10 order-2 order-md-1"
           }
         >
+          {/* Handling Alerts */}
           {this.state.failed ? (
             <TopLeftAlert alert={{ text: this.state.failedMessage }} />
           ) : (
@@ -137,10 +133,11 @@ class Portfolio extends Component {
                 <div className="container text-center text-light portfolio-loader"></div>
               ) : this.state.portfolioList.length === 0 ? (
                 <div className="container text-center text-light ">
-                  {" "}
+                  {/* No portfolio case */}
                   <h4>Start by creating a new portfolio</h4>
                 </div>
               ) : (
+                // Map portfolios
                 this.state.portfolioList.map(item => (
                   <div key={item.id} className="col-12 col-md-6 py-2">
                     <div className="card portfolio">
@@ -158,6 +155,7 @@ class Portfolio extends Component {
                         <h6 className="card-header-title"> {item.name}</h6>
                       </div>
                       <div className="card-body">
+                      {/* No equity case */}
                         {item.stocks.items.length == 0 ||
                         JSON.parse(item.stocks.items[0].symbol).length == 0 ? (
                           <div className="noEQ">

@@ -12,13 +12,8 @@ class sidebar extends Component {
   }
 
   componentDidMount(){
-    this.setState({
 
-    })
 }
-   componentDidUpdate(){
-    console.log('component did update')
-  }
 
 
   render() {

@@ -12,12 +12,9 @@ class sidebarM extends Component {
   }
 
   componentDidMount(){
-    this.setState({
 
-    })
 }
    componentDidUpdate(){
-    console.log('component did update')
   }
 
 
