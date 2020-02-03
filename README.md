@@ -8,6 +8,8 @@ API :
   
   Third party REST through financialmodelingprep.com
   
+  ---
+  
 Database :
 
   No-SQL for user data storage
@@ -15,6 +17,8 @@ Database :
   ElasticSearch for indexing
   
   PostgreSQL for stock data storage --unfinished
+  
+  ---
   
 Frontend stack:
 
@@ -26,9 +30,13 @@ Frontend stack:
   
   JS
   
+  ---
+  
 Backend stack:
 
   Node.JS
+  
+  ---
   
 Amazon AWS Series:
 
@@ -41,6 +49,8 @@ Amazon AWS Series:
   ElasticSearch
   
   EC2 Instance
+  
+  ---
   
 ## Available Scripts
 
