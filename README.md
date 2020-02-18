@@ -1,5 +1,57 @@
 This project was bootstrapped with [Create React App](https://github.com/facebook/create-react-app).
 
+Technologies used in this project are:
+
+API :
+
+  GraphQL API through AppSync
+  
+  Third party REST through financialmodelingprep.com
+  
+  ---
+  
+Database :
+
+  No-SQL for user data storage
+  
+  ElasticSearch for indexing
+  
+  PostgreSQL for stock data storage --unfinished
+  
+  ---
+  
+Frontend stack:
+
+  React
+  
+  HTML
+  
+  CSS
+  
+  JS
+  
+  ---
+  
+Backend stack:
+
+  Node.JS
+  
+  ---
+  
+Amazon AWS Series:
+
+  Cognito
+  
+  AppSync
+  
+  DynamoDB
+  
+  ElasticSearch
+  
+  EC2 Instance
+  
+  ---
+  
 ## Available Scripts
 
 In the project directory, you can run:
