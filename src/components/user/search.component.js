@@ -18,8 +18,8 @@ class search extends Component {
     var updatedSearchList = [];
     currentSearchList.filter(item => {
       if (
-        item._source.symbol.includes(this.state.searchField) ||
-        item._source.name.includes(this.state.searchField)
+        item.symbol.includes(this.state.searchField) ||
+        item.name.includes(this.state.searchField)
       ) {
         updatedSearchList.push(item);
       }
@@ -28,37 +28,38 @@ class search extends Component {
     this.setState({
       searchStockList: updatedSearchList
     });
-    const userinput = "*" + this.state.searchField + "*";
-    var fields = [];
-    if (this.state.searchField.length < 5) {
-      fields = ["symbol^2", "name"];
-    } else {
-      fields = ["symbol", "name"];
-    }
-    const query = {
-      query: {
-        query_string: {
-          fields: fields,
-          query: userinput
-        }
-      },
-      size: 30
-    };
-    // Fetch Data from ElasticSearch
+    const userinput = this.state.searchField;
+    // var fields = [];
+    // if (this.state.searchField.length < 5) {
+    //   fields = ["symbol^2", "name"];
+    // } else {
+    //   fields = ["symbol", "name"];
+    // }
+    // const query = {
+    //   query: {
+    //     query_string: {
+    //       fields: fields,
+    //       query: userinput
+    //     }
+    //   },
+    //   size: 30
+    // };
+    // Fetch Data from GraphQL
     try {
       const result = await global.fetch(
-        "https://search-financeweb-xmgf4biyujgrl4xi256rrdjwau.us-east-1.es.amazonaws.com/stocks/equi/_search",
+        `https://financialmodelingprep.com/api/v3/search?query=${userinput}&limit=10`,
         {
-          method: "POST",
+          method: "GET",
           headers: {
             Accept: "application/json",
             "Content-Type": "application/json"
-          },
-          body: JSON.stringify(query)
+          }
         }
       );
+      console.log("searching stocks")
       const json = await result.json();
-      this.getSearchChanges(json.hits.hits);
+      console.log(json)
+      this.getSearchChanges(json);
     } catch (error) {
       console.log(error);
     }
@@ -85,7 +86,7 @@ class search extends Component {
       var currentStock = currentSearchList[i];
       try {
         data = await fetch(
-          `https://financialmodelingprep.com/api/v3/company/profile/${currentStock._source.symbol}`
+          `https://financialmodelingprep.com/api/v3/company/profile/${currentStock.symbol}`
         );
         data = await data.json();
         currentStock.data = data;
@@ -178,7 +179,7 @@ class search extends Component {
                             : "badge searchListItem badge-light badge-pill invalid-data"
                         }
                       >
-                        {item._source.symbol}
+                        {item.symbol}
                       </span>
                     </div>
                     {/* Stock Price Display */}

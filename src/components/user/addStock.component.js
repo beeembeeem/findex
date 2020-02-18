@@ -31,7 +31,7 @@ class notFound extends Component {
       var currentStock = currentSearchList[i];
       try {
         data = await fetch(
-          `https://financialmodelingprep.com/api/v3/company/profile/${currentStock._source.symbol}`
+          `https://financialmodelingprep.com/api/v3/company/profile/${currentStock.symbol}`
         );
         data = await data.json();
         currentStock.data = data;
@@ -54,8 +54,8 @@ class notFound extends Component {
     var updatedSearchList = [];
     currentSearchList.filter(item => {
       if (
-        item._source.symbol.includes(this.state.searchField) ||
-        item._source.name.includes(this.state.searchField)
+        item.symbol.includes(this.state.searchField) ||
+        item.name.includes(this.state.searchField)
       ) {
         updatedSearchList.push(item);
       }
@@ -64,42 +64,41 @@ class notFound extends Component {
     this.setState({
       searchStockList: updatedSearchList
     });
-    const userinput = "*" + this.state.searchField + "*";
-    var fields = [];
-    if (this.state.searchField.length < 3) {
-      fields = ["symbol^2", "name"];
-    } else {
-      fields = ["symbol", "name"];
-    }
-    const query = {
-      query: {
-        query_string: {
-          fields: fields,
-          query: userinput,
-          fuzziness: "AUTO"
-        }
-      },
-      size: 20
-    };
+    const userinput = this.state.searchField
+    // var fields = [];
+    // if (this.state.searchField.length < 3) {
+    //   fields = ["symbol^2", "name"];
+    // } else {
+    //   fields = ["symbol", "name"];
+    // }
+    // const query = {
+    //   query: {
+    //     query_string: {
+    //       fields: fields,
+    //       query: userinput,
+    //       fuzziness: "AUTO"
+    //     }
+    //   },
+    //   size: 20
+    // };
 
     try {
       const result = await global.fetch(
-        "https://search-financeweb-xmgf4biyujgrl4xi256rrdjwau.us-east-1.es.amazonaws.com/stocks/equi/_search",
+        `https://financialmodelingprep.com/api/v3/search?query=${userinput}&limit=10`,
         {
-          method: "POST",
+          method: "GET",
           headers: {
             Accept: "application/json",
             "Content-Type": "application/json"
-          },
-          body: JSON.stringify(query)
+          }
         }
       );
       const json = await result.json();
       this.setState({
-        searchStockList: json.hits.hits,
+        searchStockList: json,
         loadingSearch: true
       });
-      this.getSearchChanges(json.hits.hits);
+      this.getSearchChanges(json);
     } catch (error) {
       console.log(error);
     }
@@ -287,7 +286,7 @@ class notFound extends Component {
               this.state.searchStockList.map(item => (
                 <li
                   class="list-group-item search-result-li  justify-content-between align-items-center "
-                  onClick={e => this.searchClickHandler(e, item._source.symbol)}
+                  onClick={e => this.searchClickHandler(e, item.symbol)}
                 >
                   <div className="row">
                     {/* Stock Symbol Display */}
@@ -309,7 +308,7 @@ class notFound extends Component {
                             : "badge searchListItem badge-light badge-pill invalid-data"
                         }
                       >
-                        {item._source.symbol}
+                        {item.symbol}
                       </span>
                     </div>
                     {/* Stock Price Display */}
