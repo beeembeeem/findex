@@ -11,7 +11,7 @@ class notFound extends Component {
       searchDuplicateError: "",
       dupAlert: false,
       sucAlert: false,
-      delAlert: false
+      delAlert: false,
     };
     this.alertTimeOut = 0;
   }
@@ -23,7 +23,7 @@ class notFound extends Component {
     }
   }
   // Get stock information about search results
-  getSearchChanges = async currentSearchList => {
+  getSearchChanges = async (currentSearchList) => {
     var first = true;
     var second = false;
     for (let i = 0; i < currentSearchList.length; i++) {
@@ -31,7 +31,7 @@ class notFound extends Component {
       var currentStock = currentSearchList[i];
       try {
         data = await fetch(
-          `https://financialmodelingprep.com/api/v3/company/profile/${currentStock.symbol}`
+          `https://financialmodelingprep.com/api/v3/company/profile/${currentStock.symbol}&apikey=749c62de5269bdd269d8e3d85d86f8a0`
         );
         data = await data.json();
         currentStock.data = data;
@@ -43,7 +43,7 @@ class notFound extends Component {
 
     this.setState({
       searchStockList: currentSearchList,
-      loadingSearch: false
+      loadingSearch: false,
     });
   };
 
@@ -52,7 +52,7 @@ class notFound extends Component {
 
     var currentSearchList = this.state.searchStockList;
     var updatedSearchList = [];
-    currentSearchList.filter(item => {
+    currentSearchList.filter((item) => {
       if (
         item.symbol.includes(this.state.searchField) ||
         item.name.includes(this.state.searchField)
@@ -62,9 +62,9 @@ class notFound extends Component {
     });
     // update similar items and prepare the new query
     this.setState({
-      searchStockList: updatedSearchList
+      searchStockList: updatedSearchList,
     });
-    const userinput = this.state.searchField
+    const userinput = this.state.searchField;
     // var fields = [];
     // if (this.state.searchField.length < 3) {
     //   fields = ["symbol^2", "name"];
@@ -84,19 +84,19 @@ class notFound extends Component {
 
     try {
       const result = await global.fetch(
-        `https://financialmodelingprep.com/api/v3/search?query=${userinput}&limit=10`,
+        `https://financialmodelingprep.com/api/v3/search?query=${userinput}&limit=10&apikey=749c62de5269bdd269d8e3d85d86f8a0`,
         {
           method: "GET",
           headers: {
             Accept: "application/json",
-            "Content-Type": "application/json"
-          }
+            "Content-Type": "application/json",
+          },
         }
       );
       const json = await result.json();
       this.setState({
         searchStockList: json,
-        loadingSearch: true
+        loadingSearch: true,
       });
       this.getSearchChanges(json);
     } catch (error) {
@@ -104,14 +104,14 @@ class notFound extends Component {
     }
   };
 
-  searchHandle = event => {
+  searchHandle = (event) => {
     const len = event.target.value.length;
     if (this.timeout) {
       // console.log("CANCELING TIMEOUT");
       clearTimeout(this.timeout);
     }
     this.setState({
-      [event.target.name]: event.target.value
+      [event.target.name]: event.target.value,
     });
     if (len > 0) {
       this.timeout = setTimeout(() => {
@@ -124,10 +124,10 @@ class notFound extends Component {
   searchClickHandler = (e, sym) => {
     e.preventDefault();
     var item = this.state.selectedStockList;
-    var duplicate = item.some(each => each["symbol"] === sym);
+    var duplicate = item.some((each) => each["symbol"] === sym);
     if (!duplicate) {
       item.push({
-        symbol: sym
+        symbol: sym,
       });
       if (this.alertTimeOut) {
         clearTimeout(this.alertTimeOut);
@@ -140,7 +140,7 @@ class notFound extends Component {
           searchAlertValue: sym,
           sucAlert: true,
           dupAlert: false,
-          delAlert: false
+          delAlert: false,
         },
         () => {
           this.alertTimeOut = setTimeout(() => {
@@ -160,7 +160,7 @@ class notFound extends Component {
           searchAlertValue: sym,
           dupAlert: true,
           sucAlert: false,
-          delAlert: false
+          delAlert: false,
         },
         () => {
           this.alertTimeOut = setTimeout(() => {
@@ -178,7 +178,7 @@ class notFound extends Component {
       clearTimeout(this.alertTimeOut);
     }
     var newList = this.state.selectedStockList.filter(
-      each => each["symbol"] != symbol
+      (each) => each["symbol"] != symbol
     );
     document.getElementsByClassName("search-alert")[0].style.opacity = 1;
     this.setState(
@@ -187,7 +187,7 @@ class notFound extends Component {
         delAlert: true,
         dupAlert: false,
         sucAlert: false,
-        searchAlertValue: symbol
+        searchAlertValue: symbol,
       },
       () => {
         this.alertTimeOut = setTimeout(() => {
@@ -200,7 +200,7 @@ class notFound extends Component {
     e.preventDefault();
     var currentStockList = this.state.selectedStockList;
     var currentStockIndex = currentStockList.findIndex(
-      each => each.symbol == symbol
+      (each) => each.symbol == symbol
     );
     var currentStock = currentStockList[currentStockIndex];
     if (currentStock.expanded) {
@@ -210,10 +210,10 @@ class notFound extends Component {
       currentStock.expanded = true;
       currentStockList.splice(currentStockIndex, currentStock);
       this.setState({
-        selectedStockList: currentStockList
+        selectedStockList: currentStockList,
       });
       var data = await fetch(
-        `https://financialmodelingprep.com/api/v3/company/profile/${currentStock.symbol}`
+        `https://financialmodelingprep.com/api/v3/company/profile/${currentStock.symbol}?apikey=749c62de5269bdd269d8e3d85d86f8a0`
       );
       data = await data.json();
       currentStock.expanded = true;
@@ -221,12 +221,12 @@ class notFound extends Component {
       currentStockList.splice(currentStockIndex, currentStock);
     }
     this.setState({
-      selectedStockList: currentStockList
+      selectedStockList: currentStockList,
     });
   };
   expandAllStockData = async () => {
     this.setState({
-      expandingAll: true
+      expandingAll: true,
     });
     var currentStockList = this.state.selectedStockList;
     var newList = [];
@@ -234,7 +234,7 @@ class notFound extends Component {
       var currentStock = currentStockList[i];
       try {
         var data = await fetch(
-          `https://financialmodelingprep.com/api/v3/company/profile/${currentStock.symbol}`
+          `https://financialmodelingprep.com/api/v3/company/profile/${currentStock.symbol}?apikey=749c62de5269bdd269d8e3d85d86f8a0`
         );
         data = await data.json();
         currentStock.data = data;
@@ -246,12 +246,12 @@ class notFound extends Component {
     }
     this.setState({
       selectedStockList: newList,
-      expandingAll: false
+      expandingAll: false,
     });
   };
   shrinkAllStockData = () => {
     this.setState({
-      expandingAll: true
+      expandingAll: true,
     });
     var currentStockList = this.state.selectedStockList;
     var newList = [];
@@ -262,7 +262,7 @@ class notFound extends Component {
     }
     this.setState({
       selectedStockList: newList,
-      expandingAll: false
+      expandingAll: false,
     });
   };
   render() {
@@ -283,10 +283,10 @@ class notFound extends Component {
             {/* Dumping search match list */}
             {this.state.searchStockList != [] &&
               this.state.searchField &&
-              this.state.searchStockList.map(item => (
+              this.state.searchStockList.map((item) => (
                 <li
                   class="list-group-item search-result-li  justify-content-between align-items-center "
-                  onClick={e => this.searchClickHandler(e, item.symbol)}
+                  onClick={(e) => this.searchClickHandler(e, item.symbol)}
                 >
                   <div className="row">
                     {/* Stock Symbol Display */}
@@ -356,7 +356,7 @@ class notFound extends Component {
             </div>
           )}
           {/* Dumping the selected stock list */}
-          {this.state.selectedStockList.map(item => (
+          {this.state.selectedStockList.map((item) => (
             <div className="col-lg-6 col-6 py-3 px-2 px-lg-3 ">
               <div className="card text-white bg-primary">
                 <div className="card-header text-center">
@@ -369,13 +369,13 @@ class notFound extends Component {
                     type="button"
                     className="search-stock-close close text-light"
                     aria-label="Close"
-                    onClick={e => this.handleStockDelete(e, item.symbol)}
+                    onClick={(e) => this.handleStockDelete(e, item.symbol)}
                   >
                     <span aria-hidden="true">&times; </span>
                   </button>
                   <button
                     className="stock-expand-option"
-                    onClick={e => this.handleStockExpand(e, item.symbol)}
+                    onClick={(e) => this.handleStockExpand(e, item.symbol)}
                   >
                     <span class="fas fa-chevron-down"></span>
                   </button>
@@ -404,10 +404,11 @@ class notFound extends Component {
                         <div className="row py-1">
                           <div className="col-12">
                             <a
-                              href={`https://www.google.com/search?q=${item.data
-                                .profile.industry +
+                              href={`https://www.google.com/search?q=${
+                                item.data.profile.industry +
                                 " " +
-                                item.data.profile.sector}`}
+                                item.data.profile.sector
+                              }`}
                               target="_blank"
                             >
                               {item.data.profile.industry}

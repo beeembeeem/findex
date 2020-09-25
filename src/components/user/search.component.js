@@ -7,16 +7,15 @@ class search extends Component {
     this.tempSearchField = [];
     this.state = {
       searchField: "",
-      searchStockList: []
+      searchStockList: [],
     };
   }
-  componentDidMount() {
-  }
+  componentDidMount() {}
   search = async () => {
     // Cache similar items in current searchstocklist
     var currentSearchList = this.state.searchStockList;
     var updatedSearchList = [];
-    currentSearchList.filter(item => {
+    currentSearchList.filter((item) => {
       if (
         item.symbol.includes(this.state.searchField) ||
         item.name.includes(this.state.searchField)
@@ -26,7 +25,7 @@ class search extends Component {
     });
     // update similar items and prepare the new query
     this.setState({
-      searchStockList: updatedSearchList
+      searchStockList: updatedSearchList,
     });
     const userinput = this.state.searchField;
     // var fields = [];
@@ -47,18 +46,18 @@ class search extends Component {
     // Fetch Data from GraphQL
     try {
       const result = await global.fetch(
-        `https://financialmodelingprep.com/api/v3/search?query=${userinput}&limit=10`,
+        `https://financialmodelingprep.com/api/v3/search?query=${userinput}&limit=10&apikey=749c62de5269bdd269d8e3d85d86f8a0`,
         {
           method: "GET",
           headers: {
             Accept: "application/json",
-            "Content-Type": "application/json"
-          }
+            "Content-Type": "application/json",
+          },
         }
       );
-      console.log("searching stocks")
+      console.log("searching stocks");
       const json = await result.json();
-      console.log(json)
+      console.log(json);
       this.getSearchChanges(json);
     } catch (error) {
       console.log(error);
@@ -66,10 +65,10 @@ class search extends Component {
   };
 
   // Get stock information about search results
-  getSearchChanges = async currentSearchList => {
+  getSearchChanges = async (currentSearchList) => {
     var first = true;
     var second = false;
-  // Display the first 5, then procced to the rest
+    // Display the first 5, then procced to the rest
     for (let i = 0; i < currentSearchList.length; i++) {
       if (first) {
         if (i > 5) {
@@ -77,7 +76,7 @@ class search extends Component {
         }
       } else if (!second) {
         this.setState({
-          searchStockList: currentSearchList
+          searchStockList: currentSearchList,
         });
         second = true;
       }
@@ -86,7 +85,7 @@ class search extends Component {
       var currentStock = currentSearchList[i];
       try {
         data = await fetch(
-          `https://financialmodelingprep.com/api/v3/company/profile/${currentStock.symbol}`
+          `https://financialmodelingprep.com/api/v3/company/profile/${currentStock.symbol}?apikey=749c62de5269bdd269d8e3d85d86f8a0`
         );
         data = await data.json();
         currentStock.data = data;
@@ -97,19 +96,19 @@ class search extends Component {
     }
 
     this.setState({
-      searchStockList: currentSearchList
+      searchStockList: currentSearchList,
     });
   };
 
   // Handle search and timing out when user is not typing
-  searchHandle = event => {
+  searchHandle = (event) => {
     const len = event.target.value.length;
     if (this.timeout) {
       // console.log("CANCELING TIMEOUT");
       clearTimeout(this.timeout);
     }
     this.setState({
-      [event.target.name]: event.target.value
+      [event.target.name]: event.target.value,
     });
     if (len > 0) {
       this.timeout = setTimeout(() => {
@@ -124,11 +123,11 @@ class search extends Component {
     const itemString = JSON.stringify(item);
     // console.log(itemString)
     this.setState({
-      searchField: ""
+      searchField: "",
     });
     this.props.history.push({
       pathname: `/equ/${item._source.symbol}`,
-      state: item.data
+      state: item.data,
     });
   };
   render() {
@@ -154,10 +153,10 @@ class search extends Component {
             {/* Dumping search match list */}
             {this.state.searchStockList != [] &&
               this.state.searchField &&
-              this.state.searchStockList.map(item => (
+              this.state.searchStockList.map((item) => (
                 <li
                   class="list-group-item search-result-li  justify-content-between align-items-center "
-                  onClick={e => this.searchClickHandler(e, item)}
+                  onClick={(e) => this.searchClickHandler(e, item)}
                 >
                   <div className="row">
                     {/* Stock Symbol Display */}

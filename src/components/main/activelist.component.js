@@ -9,12 +9,12 @@ export default class dumper extends Component {
   async componentDidMount() {
     try {
       var data = await fetch(
-        "https://financialmodelingprep.com/api/v3/stock/actives"
+        "https://financialmodelingprep.com/api/v3/stock/actives?apikey=749c62de5269bdd269d8e3d85d86f8a0"
       );
       var data = await data.json();
       // Most Gainer Fetch
       var dataG = await fetch(
-        "https://financialmodelingprep.com/api/v3/stock/gainers"
+        "https://financialmodelingprep.com/api/v3/stock/gainers?apikey=749c62de5269bdd269d8e3d85d86f8a0"
       );
       var dataG = await dataG.json();
       console.log(data);
@@ -22,7 +22,7 @@ export default class dumper extends Component {
 
       this.setState({
         activeList: data.mostActiveStock,
-        gainerList: dataG.mostGainerStock
+        gainerList: dataG.mostGainerStock,
       });
     } catch (error) {}
   }
@@ -33,7 +33,7 @@ export default class dumper extends Component {
           <h5>Today's Most Active</h5>
         </div>
         {this.state.activeList &&
-          this.state.activeList.map(item => (
+          this.state.activeList.map((item) => (
             <div className="col-lg-4  col-6 py-3 px-2 px-lg-3 ">
               <a href={`/equ/${item.ticker}`}>
                 <div
@@ -72,13 +72,13 @@ export default class dumper extends Component {
             </div>
           ))}
 
-          {/* Gainer Dump */}
+        {/* Gainer Dump */}
 
-          <div className="col-12 mx-0">
+        <div className="col-12 mx-0">
           <h5>Today's Most Gainers </h5>
         </div>
         {this.state.activeList &&
-          this.state.gainerList.map(item => (
+          this.state.gainerList.map((item) => (
             <div className="col-lg-4  col-6 py-3 px-2 px-lg-3 ">
               <a href={`/equ/${item.ticker}`}>
                 <div

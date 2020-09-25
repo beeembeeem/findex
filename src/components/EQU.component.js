@@ -9,7 +9,7 @@ import {
   Route,
   Link,
   useParams,
-  withRouter
+  withRouter,
 } from "react-router-dom";
 
 class EQU extends Component {
@@ -28,7 +28,7 @@ class EQU extends Component {
       stockSymbol: stockSymbol,
       stockProfile: stockProfile,
       loading: loading,
-      failed: false
+      failed: false,
     };
   }
   //handle state for when page is loaded but not through search
@@ -54,7 +54,7 @@ class EQU extends Component {
       var stockProfile = this.props.location.state.profile;
       this.setState({
         stockSymbol: stockSymbol,
-        stockProfile: stockProfile
+        stockProfile: stockProfile,
       });
     } else if (!this.state.stockProfile && !this.state.failed) {
       //Fetch the stock Data
@@ -63,22 +63,22 @@ class EQU extends Component {
       // console.log(data)
       if (!data.profile) {
         this.setState({
-          failed: true
+          failed: true,
         });
       } else {
         this.setState({
           stockSymbol: stockSymbol,
-          stockProfile: stockProfile
+          stockProfile: stockProfile,
         });
       }
     } else {
     }
   }
   //Fetch function
-  fetchProfile = async stockSymbol => {
+  fetchProfile = async (stockSymbol) => {
     try {
       var data = await fetch(
-        `https://financialmodelingprep.com/api/v3/company/profile/${stockSymbol}`
+        `https://financialmodelingprep.com/api/v3/company/profile/${stockSymbol}?apikey=749c62de5269bdd269d8e3d85d86f8a0`
       );
       data = await data.json();
       return data;
